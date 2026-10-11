@@ -1,6 +1,8 @@
 [tools]
 pinact = "latest"
+prek = "latest"
 uv = "latest"
+zizmor = "latest"
 
 [settings]
 minimum_release_age = "10d"
