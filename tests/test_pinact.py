@@ -26,7 +26,7 @@ def test_pinact_exit_code_and_authentication(exit_code: int) -> None:
         ) as run,
     ):
         assert main() == exit_code
-    assert run.call_args.args[0] == ["pinact", "run", "--min-age", "10"]
+    assert run.call_args.args[0] == ["pinact", "run", "--min-age", "10", "--update"]
     assert run.call_args.kwargs["env"]["PINACT_GITHUB_TOKEN"] == "test-token"
 
 

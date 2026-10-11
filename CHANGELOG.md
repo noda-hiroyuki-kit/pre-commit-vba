@@ -7,16 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.6] - 2026-10-12
+
 ### Changed
 
 - Bump minimum `prek` requirement from 0.5.3 to 0.5.4. ([#198])  
   `prek` の最小要件を 0.5.3 から 0.5.4 へ引き上げ.
 - Bump minimum `python-slugify` requirement from 9.1.1 to 9.1.2. ([#198])  
   `python-slugify` の最小要件を 9.1.1 から 9.1.2 へ引き上げ.
-- Bump minimum  `tox` requirement from 4.64.3 to 4.64.4. ([#198])  
+- Bump minimum `tox` requirement from 4.64.3 to 4.64.4. ([#198])  
   `tox` の最小要件を 4.64.3 から 4.64.4 へ引き上げ.
-- Bump minimum  `zensical` requirement from 0.0.65 to 0.0.66.  ([#198])  
-  `zensical`  の最小要件を 0.0.65 から 0.0.66 へ引き上げ.
+- Bump minimum `zensical` requirement from 0.0.65 to 0.0.66. ([#198])  
+  `zensical` の最小要件を 0.0.65 から 0.0.66 へ引き上げ.
 - Raise the minimum `uv_build` requirement from 0.12.19 to 0.12.21.  
   `uv_build` の最小要件を 0.12.19 から 0.12.21 へ引き上げ.
 - Bump minimum `tox` requirement from 4.64.4 to 4.64.6.  
@@ -472,7 +474,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Release as first version
 
-[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.5...HEAD
+[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.6...HEAD
+[0.4.6]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.5...v0.4.6
 [0.4.5]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.4...v0.4.5
 [0.4.4]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.2...v0.4.3

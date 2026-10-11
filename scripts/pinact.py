@@ -28,7 +28,7 @@ def main() -> int:
         return 1
 
     result = subprocess.run(  # noqa: S603
-        [pinact, "run", "--min-age", "10"],
+        [pinact, "run", "--min-age", "10", "--update"],
         env=dict(os.environ, PINACT_GITHUB_TOKEN=token),
         check=False,
     )
