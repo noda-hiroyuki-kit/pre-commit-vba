@@ -19,9 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `zensical` を 0.0.65 から 0.0.66 へ引き上げ.
 - Raise the minimum `uv_build` requirement from 0.12.19 to 0.12.21.  
   `uv_build` の最小要件を 0.12.19 から 0.12.21 へ引き上げ.
-- Bump minimum `tox` from 4.64.4 to 4.64.6.  
+- Bump minimum `tox` requirement from 4.64.4 to 4.64.6.  
   `tox` の最小要件を 4.64.4 から 4.64.6 へ引き上げ.
-- Bump minimum `zensical` from 0.0.66 to 0.0.67.  
+- Bump minimum `zensical` requirement from 0.0.66 to 0.0.67.  
   `zensical` の最小要件を 0.0.66 から 0.0.67 へ引き上げ.
 - Manage `prek` and `zizmor` with `mise` instead of Python development dependencies, and configure the default pre-commit hook types and stages.  
   `prek` と `zizmor` を Python の開発依存関係ではなく `mise` で管理し, pre-commit hook のデフォルトの種類と stage を設定.
