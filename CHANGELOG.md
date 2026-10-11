@@ -17,6 +17,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `tox` を 4.64.3 から 4.64.4 へ引き上げ.
 - Bump minimum  `zensical` from 0.0.65 to 0.0.66.  ([#198])  
   `zensical` を 0.0.65 から 0.0.66 へ引き上げ.
+- Raise the minimum `uv_build` requirement from 0.12.19 to 0.12.21.  
+  `uv_build` の最小要件を 0.12.19 から 0.12.21 へ引き上げ.
+- Bump minimum `tox` from 4.64.4 to 4.64.5.  
+  `tox` の最小要件を 4.64.4 から 4.64.5 へ引き上げ.
+- Bump minimum `zensical` from 0.0.66 to 0.0.67.  
+  `zensical` の最小要件を 0.0.66 から 0.0.67 へ引き上げ.
+- Manage `prek` and `zizmor` with `mise` instead of Python development dependencies, and configure the default pre-commit hook types and stages.  
+  `prek` と `zizmor` を Python の開発依存関係ではなく `mise` で管理し, pre-commit hook のデフォルトの種類と stage を設定.
+- Update the cspell hook to v10.3.0.  
+  cspell hook を v10.3.0 へ更新.
+- Update the documentation and pre-commit autoupdate workflows for the current tooling.  
+  ドキュメントと pre-commit autoupdate workflow を現在のツール構成に合わせて更新.
+- Configure `pinact` and `zizmor` pre-commit hooks to pin and audit GitHub Actions, with a 10-day minimum age check in `pinact`.  
+  GitHub Actions のピン留めと監査を行う `pinact` と `zizmor` の pre-commit hook を設定し, `pinact` で最低経過日数 10 日を検証.
 
 ## [0.4.5] - 2026-10-07
 
