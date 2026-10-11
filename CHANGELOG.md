@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.6] - 2026-10-12
+
 ### Changed
 
 - Bump minimum `prek` requirement from 0.5.3 to 0.5.4. ([#198])  
@@ -472,7 +474,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Release as first version
 
-[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.5...HEAD
+[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.6...HEAD
+[0.4.6]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.5...v0.4.6
 [0.4.5]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.4...v0.4.5
 [0.4.4]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.2...v0.4.3
