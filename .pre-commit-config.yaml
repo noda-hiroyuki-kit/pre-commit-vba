@@ -21,7 +21,7 @@ repos:
       - id: pinact
         name: Pin and check GitHub Actions (10-day minimum age)
         language: unsupported
-        entry: pinact run --min-age 10
+        entry: uv run scripts/pinact.py
         pass_filenames: false
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
     rev: v1.30.1

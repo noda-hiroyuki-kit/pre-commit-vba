@@ -165,7 +165,6 @@ env_list = ["dependency", "fix", "type", "3.14"]
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
 description = "Run test under {base_python}"
-pass_env = ["PINACT_GITHUB_TOKEN", "GITHUB_TOKEN"]
 allowlist_externals = ["pytest", "mypy", "prek","uv", "pinact", "zizmor"]
 commands=[["pytest"]]
 

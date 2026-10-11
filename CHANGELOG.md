@@ -31,8 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   ドキュメントと pre-commit autoupdate workflow を現在のツール構成に合わせて更新.
 - Configure `pinact` and `zizmor` pre-commit hooks to pin and audit GitHub Actions, with a 10-day minimum age check in `pinact`.  
   GitHub Actions のピン留めと監査を行う `pinact` と `zizmor` の pre-commit hook を設定し, `pinact` で最低経過日数 10 日を検証.
-- Run `uv run scripts/pinact.py` from `uv run tox -e dependency` to use GitHub CLI authentication automatically for Pinact; GitHub CLI must be installed and authenticated with `gh auth login`.  
-  `uv run tox -e dependency` から `uv run scripts/pinact.py` を実行し, Pinact で GitHub CLI の認証を自動利用. GitHub CLI のインストールと `gh auth login` による認証が必要.
+- Run `uv run scripts/pinact.py` from the dependency tox environment and the Pinact pre-commit hook to use GitHub CLI authentication automatically, passing the token only to Pinact rather than all tox environments; GitHub CLI must be installed and authenticated with `gh auth login`.  
+  dependency tox 環境と Pinact pre-commit hook から `uv run scripts/pinact.py` を実行し, GitHub CLI の認証を自動利用. トークンは全 tox 環境ではなく Pinact にのみ渡す. GitHub CLI のインストールと `gh auth login` による認証が必要.
 
 ## [0.4.5] - 2026-10-07
 
