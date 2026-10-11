@@ -33,6 +33,7 @@ prek init
         #:schema https://www.schemastore.org/prek.json
 
         default_install_hook_types = ["pre-commit", "commit-msg"]
+        default_stages = ["pre-commit", "manual"]
 
         [[repos]]
         repo = "https://github.com/noda-hiroyuki-kit/pre-commit-vba"
@@ -44,7 +45,7 @@ prek init
 
         [[repos]]
         repo = "https://github.com/streetsidesoftware/cspell-cli"
-        rev = "v10.2.0"
+        rev = "v10.3.0"
 
         [[repos.hooks]]
         id = "cspell"
