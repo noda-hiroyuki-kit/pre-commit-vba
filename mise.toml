@@ -1,5 +1,6 @@
 [tools]
 pinact = "latest"
+prek = "latest"
 uv = "latest"
 
 [settings]
