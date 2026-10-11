@@ -16,6 +16,17 @@ repos:
           - .git/COMMIT_EDITMSG
         stages: [commit-msg]
         always_run: true # This might not be necessary.
+  - repo: local
+    hooks:
+      - id: pinact
+        name: Pin and check GitHub Actions (10-day minimum age)
+        language: unsupported
+        entry: pinact run --min-age 10
+        pass_filenames: false
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: v1.30.1
+    hooks:
+      - id: zizmor
   - repo: builtin
     hooks:
       - id: trailing-whitespace
