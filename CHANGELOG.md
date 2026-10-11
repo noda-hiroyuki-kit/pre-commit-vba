@@ -19,8 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `zensical` を 0.0.65 から 0.0.66 へ引き上げ.
 - Raise the minimum `uv_build` requirement from 0.12.19 to 0.12.21.  
   `uv_build` の最小要件を 0.12.19 から 0.12.21 へ引き上げ.
-- Bump minimum `tox` from 4.64.4 to 4.64.5.  
-  `tox` の最小要件を 4.64.4 から 4.64.5 へ引き上げ.
+- Bump minimum `tox` from 4.64.4 to 4.64.6.  
+  `tox` の最小要件を 4.64.4 から 4.64.6 へ引き上げ.
 - Bump minimum `zensical` from 0.0.66 to 0.0.67.  
   `zensical` の最小要件を 0.0.66 から 0.0.67 へ引き上げ.
 - Manage `prek` and `zizmor` with `mise` instead of Python development dependencies, and configure the default pre-commit hook types and stages.  
@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   ドキュメントと pre-commit autoupdate workflow を現在のツール構成に合わせて更新.
 - Configure `pinact` and `zizmor` pre-commit hooks to pin and audit GitHub Actions, with a 10-day minimum age check in `pinact`.  
   GitHub Actions のピン留めと監査を行う `pinact` と `zizmor` の pre-commit hook を設定し, `pinact` で最低経過日数 10 日を検証.
+- Run `uv run scripts/pinact.py` from `uv run tox -e dependency` to use GitHub CLI authentication automatically for Pinact; GitHub CLI must be installed and authenticated with `gh auth login`.  
+  `uv run tox -e dependency` から `uv run scripts/pinact.py` を実行し, Pinact で GitHub CLI の認証を自動利用. GitHub CLI のインストールと `gh auth login` による認証が必要.
 
 ## [0.4.5] - 2026-10-07
 

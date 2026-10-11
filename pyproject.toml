@@ -27,7 +27,7 @@ dev = [
     "python-slugify>=9.1.2",
     "ruff>=0.16.9",
     "termynal>=0.14.0",
-    "tox>=4.64.5",
+    "tox>=4.64.6",
     "tox-uv>=1.36.0",
     "zensical>=0.0.67",
     "types-pyyaml>=6.0.12.20260815",
@@ -165,6 +165,7 @@ env_list = ["dependency", "fix", "type", "3.14"]
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
 description = "Run test under {base_python}"
+pass_env = ["PINACT_GITHUB_TOKEN", "GITHUB_TOKEN"]
 allowlist_externals = ["pytest", "mypy", "prek","uv", "pinact", "zizmor"]
 commands=[["pytest"]]
 
@@ -173,10 +174,10 @@ runner = "uv-venv-lock-runner"
 description = "update dependency"
 skip_install = true
 commands = [
-    ["pinact", "run"],
+    ["prek", "update", "--cooldown-days", "10"],
+    ["uv", "run", "scripts/pinact.py"],
     ["uv", "lock", "-U"],
     ["uv", "sync"],
-    ["uv", "run", "prek", "update", "--cooldown-days", "10"],
 ]
 
 [tool.tox.env.fix]
@@ -184,8 +185,7 @@ runner = "uv-venv-lock-runner"
 description = "run code formatter and linter (auto-fix)"
 skip_install = true
 commands = [
-    ["uv", "run", "prek", "run", "--all-files", "--show-diff-on-failure"],
-    ["uv", "run", "zizmor", "--fix=all", ".github/workflows"],
+    ["prek", "run", "--all-files", "--show-diff-on-failure"],
 ]
 
 [tool.tox.env.type]
@@ -193,8 +193,8 @@ runner = "uv-venv-lock-runner"
 description = "run type checker via mypy"
 skip_install = true
 commands = [
-    ["mypy", "."],
-    ["mypy", "tests"],
+    ["uv", "run", "mypy", "."],
+    ["uv", "run", "mypy", "tests"],
 ]
 
 [tool.pytest]
