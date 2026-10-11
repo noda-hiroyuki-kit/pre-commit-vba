@@ -2,7 +2,9 @@
 """Tests for the authenticated Pinact runner."""
 # ruff: noqa: S101, S105
 
+import runpy
 import subprocess
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -57,3 +59,24 @@ def test_missing_executable(capsys: pytest.CaptureFixture[str]) -> None:
         assert main() == 1
     run.assert_not_called()
     assert "must be installed" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("exit_code", [0, 2, 3])
+def test_script_entry_point(exit_code: int) -> None:
+    """Exit with Pinact's status when executed as a script."""
+    with (
+        patch("shutil.which", side_effect=["gh", "pinact"]),
+        patch(
+            "subprocess.run",
+            side_effect=[
+                subprocess.CompletedProcess([], 0, "test-token\n", ""),
+                subprocess.CompletedProcess([], exit_code),
+            ],
+        ),
+        pytest.raises(SystemExit) as exc_info,
+    ):
+        runpy.run_path(
+            str(Path(__file__).resolve().parents[1] / "scripts" / "pinact.py"),
+            run_name="__main__",
+        )
+    assert exc_info.value.code == exit_code
