@@ -167,8 +167,7 @@ def get_noninteractive_powerpoint_app() -> PowerPointApplicationProtocol:
     """
     dispatch_ex = get_dispatch_ex()
     powerpoint_app = cast(
-        "PowerPointApplicationProtocol",
-        dispatch_ex("PowerPoint.Application"),
+        "PowerPointApplicationProtocol", dispatch_ex("PowerPoint.Application")
     )
     powerpoint_app.DisplayAlerts = constants.ppAlertsNone
     powerpoint_app.AutomationSecurity = constants.mso_automation_security_force_disable
@@ -176,9 +175,7 @@ def get_noninteractive_powerpoint_app() -> PowerPointApplicationProtocol:
 
 
 def cleanup_office_resource(
-    action: Callable[[], None],
-    resource_name: str,
-    application_name: str,
+    action: Callable[[], None], resource_name: str, application_name: str
 ) -> None:
     """Run Office cleanup without masking the original failure cause.
 
@@ -196,7 +193,7 @@ def cleanup_office_resource(
         )
 
 
-__version__ = "0.4.6"
+__version__ = "0.4.7"
 
 
 class UndefineTypeError(Exception):
@@ -387,27 +384,17 @@ def is_excel_file(office_file_path: Path) -> bool:
     Legacy binary `.xls` files are not supported because they are OLE compound
     documents and do not expose a VBA project ZIP stream.
     """
-    return office_file_path.suffix.lower() in {
-        ".xlsm",
-        ".xltm",
-        ".xlam",
-    }
+    return office_file_path.suffix.lower() in {".xlsm", ".xltm", ".xlam"}
 
 
 def is_word_file(office_file_path: Path) -> bool:
     """Check if a path has a supported Word VBA file extension."""
-    return office_file_path.suffix.lower() in {
-        ".docm",
-        ".dotm",
-    }
+    return office_file_path.suffix.lower() in {".docm", ".dotm"}
 
 
 def is_powerpoint_file(office_file_path: Path) -> bool:
     """Check if a path has a supported PowerPoint VBA file extension."""
-    return office_file_path.suffix.lower() in {
-        ".pptm",
-        ".potm",
-    }
+    return office_file_path.suffix.lower() in {".pptm", ".potm"}
 
 
 def is_office_file(office_file_path: Path) -> bool:
@@ -447,9 +434,7 @@ class ExcelVbaExporter(OfficeVbaExporter):
         finally:
             if workbook is not None:
                 cleanup_office_resource(
-                    lambda: workbook.Close(SaveChanges=False),
-                    "workbook",
-                    "Excel",
+                    lambda: workbook.Close(SaveChanges=False), "workbook", "Excel"
                 )
             cleanup_office_resource(app.Quit, "application", "Excel")
 
@@ -467,23 +452,18 @@ class WordVbaExporter(OfficeVbaExporter):
         document = None
         try:
             document = app.Documents.Open(
-                str(settings.office_file_path),
-                ReadOnly=True,
-                AddToRecentFiles=False,
+                str(settings.office_file_path), ReadOnly=True, AddToRecentFiles=False
             )
             settings.export_folder.mkdir(parents=True, exist_ok=True)
             for vb_comp in document.VBProject.VBComponents:
                 vb_comp_file_name = vb_component_type_factory(
-                    vb_comp.Name,
-                    vb_comp.Type,
+                    vb_comp.Name, vb_comp.Type
                 ).file_name
                 vb_comp.Export(Path(settings.export_folder, vb_comp_file_name))
         finally:
             if document is not None:
                 cleanup_office_resource(
-                    lambda: document.Close(SaveChanges=False),
-                    "document",
-                    "Word",
+                    lambda: document.Close(SaveChanges=False), "document", "Word"
                 )
             cleanup_office_resource(app.Quit, "application", "Word")
 
@@ -497,24 +477,19 @@ class PowerPointVbaExporter(OfficeVbaExporter):
         presentation = None
         try:
             presentation = app.Presentations.Open(
-                str(settings.office_file_path),
-                ReadOnly=True,
-                WithWindow=False,
+                str(settings.office_file_path), ReadOnly=True, WithWindow=False
             )
             vb_components = presentation.VBProject.VBComponents
             settings.export_folder.mkdir(parents=True, exist_ok=True)
             for vb_comp in vb_components:
                 vb_comp_file_name = vb_component_type_factory(
-                    vb_comp.Name,
-                    vb_comp.Type,
+                    vb_comp.Name, vb_comp.Type
                 ).file_name
                 vb_comp.Export(Path(settings.export_folder, vb_comp_file_name))
         finally:
             if presentation is not None:
                 cleanup_office_resource(
-                    presentation.Close,
-                    "presentation",
-                    "PowerPoint",
+                    presentation.Close, "presentation", "PowerPoint"
                 )
 
             cleanup_office_resource(app.Quit, "application", "PowerPoint")
@@ -771,8 +746,7 @@ def get_staging_status() -> str:
     stderr_text = stderr_data.decode("utf-8", errors="replace").strip()
     if process.returncode != 0:
         logger.error(
-            "Failed to get staging status via 'git write-tree'. stderr: %s",
-            stderr_text,
+            "Failed to get staging status via 'git write-tree'. stderr: %s", stderr_text
         )
         raise StagingStatusError
     return stdout_data.decode("utf-8")
@@ -841,15 +815,11 @@ class ExcelOfficeFileVersion(OfficeFileVersion):
         workbook = None
         try:
             workbook = excel_app.Workbooks.Open(office_file_path, ReadOnly=True)
-            self.__version = str(
-                workbook.BuiltinDocumentProperties("Document version"),
-            )
+            self.__version = str(workbook.BuiltinDocumentProperties("Document version"))
         finally:
             if workbook is not None:
                 cleanup_office_resource(
-                    lambda: workbook.Close(SaveChanges=False),
-                    "workbook",
-                    "Excel",
+                    lambda: workbook.Close(SaveChanges=False), "workbook", "Excel"
                 )
             cleanup_office_resource(excel_app.Quit, "application", "Excel")
 
@@ -868,19 +838,13 @@ class WordOfficeFileVersion(OfficeFileVersion):
         document = None
         try:
             document = word_app.Documents.Open(
-                str(office_file_path),
-                ReadOnly=True,
-                AddToRecentFiles=False,
+                str(office_file_path), ReadOnly=True, AddToRecentFiles=False
             )
-            self.__version = str(
-                document.BuiltinDocumentProperties("Document version"),
-            )
+            self.__version = str(document.BuiltinDocumentProperties("Document version"))
         finally:
             if document is not None:
                 cleanup_office_resource(
-                    lambda: document.Close(SaveChanges=False),
-                    "document",
-                    "Word",
+                    lambda: document.Close(SaveChanges=False), "document", "Word"
                 )
             cleanup_office_resource(word_app.Quit, "application", "Word")
 
@@ -899,25 +863,17 @@ class PowerPointOfficeFileVersion(OfficeFileVersion):
         presentation = None
         try:
             presentation = powerpoint_app.Presentations.Open(
-                str(office_file_path),
-                ReadOnly=True,
-                WithWindow=False,
+                str(office_file_path), ReadOnly=True, WithWindow=False
             )
             self.__version = str(
-                presentation.BuiltinDocumentProperties("Document version"),
+                presentation.BuiltinDocumentProperties("Document version")
             )
         finally:
             if presentation is not None:
                 cleanup_office_resource(
-                    presentation.Close,
-                    "presentation",
-                    "PowerPoint",
+                    presentation.Close, "presentation", "PowerPoint"
                 )
-            cleanup_office_resource(
-                powerpoint_app.Quit,
-                "application",
-                "PowerPoint",
-            )
+            cleanup_office_resource(powerpoint_app.Quit, "application", "PowerPoint")
 
     @property
     def version(self) -> str:
@@ -974,8 +930,7 @@ def _validate_vba_chunk(chunk_size: int, chunk_signature: int, chunk_flag: int) 
 
 
 def _copy_token_help(
-    decompressed_current: int,
-    decompressed_chunk_start: int,
+    decompressed_current: int, decompressed_chunk_start: int
 ) -> tuple[int, int, int, int]:
     """Return masks and bit width for a VBA CopyToken."""
     difference = decompressed_current - decompressed_chunk_start
@@ -987,10 +942,7 @@ def _copy_token_help(
 
 
 def _decompress_vba_tokens(
-    data: bytes | bytearray,
-    chunk_start: int,
-    chunk_size: int,
-    decompressed: bytearray,
+    data: bytes | bytearray, chunk_start: int, chunk_size: int, decompressed: bytearray
 ) -> int:
     """Decompress a single token sequence in a compressed VBA chunk."""
     pos = chunk_start + 2
@@ -1011,8 +963,7 @@ def _decompress_vba_tokens(
                 raise ValueError(error_message)
             copy_token = struct.unpack("<H", data[pos : pos + 2])[0]
             length_mask, offset_mask, bit_count, _ = _copy_token_help(
-                len(decompressed),
-                decompressed_chunk_start,
+                len(decompressed), decompressed_chunk_start
             )
             length = (copy_token & length_mask) + 3
             temp1 = copy_token & offset_mask
@@ -1043,8 +994,7 @@ def decompress_stream(compressed_container: bytes | bytearray) -> bytes:
     while pos < len(compressed_container):
         chunk_start = pos
         chunk_size, chunk_signature, chunk_flag = _read_vba_chunk_header(
-            compressed_container,
-            chunk_start,
+            compressed_container, chunk_start
         )
         _validate_vba_chunk(chunk_size, chunk_signature, chunk_flag)
 
@@ -1059,10 +1009,7 @@ def decompress_stream(compressed_container: bytes | bytearray) -> bytes:
             continue
 
         pos = _decompress_vba_tokens(
-            compressed_container,
-            chunk_start,
-            chunk_size,
-            decompressed,
+            compressed_container, chunk_start, chunk_size, decompressed
         )
 
     return bytes(decompressed)
@@ -1226,8 +1173,7 @@ def check(
             exist_office_file = True
             if has_rubberduck_addin_references(office_file_path):
                 logger.error(
-                    "Rubberduck Add-in reference detected: %s",
-                    office_file_path,
+                    "Rubberduck Add-in reference detected: %s", office_file_path
                 )
                 sys.exit(1)
             office_file_version = get_office_file_version(office_file_path)

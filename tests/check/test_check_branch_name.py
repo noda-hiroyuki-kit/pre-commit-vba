@@ -23,8 +23,7 @@ def test_get_current_branch_name() -> None:
 
 
 @pytest.mark.skipif(
-    pre_commit_vba.DispatchEx is None,
-    reason="pywin32 is only available on Windows",
+    pre_commit_vba.DispatchEx is None, reason="pywin32 is only available on Windows"
 )
 class TestGetOfficeFileVersion:
     """Tests for get_office_file_version."""
@@ -40,34 +39,21 @@ class TestGetOfficeFileVersion:
                 "with_codes",
                 "v0.0.1-alpha",
                 "test.xlsm",
-            ),
+            )
         )
         assert sut == "v0.0.1-alpha"  # noqa: S101
 
     def test_get_document_version(self) -> None:
         """Test get document version."""
         sut = get_office_file_version(
-            Path(
-                Path.cwd(),
-                "tests",
-                "word",
-                "extract",
-                "with_codes",
-                "test-doc.docm",
-            ),
+            Path(Path.cwd(), "tests", "word", "extract", "with_codes", "test-doc.docm")
         )
         assert sut == "v0.0.1"  # noqa: S101
 
     def test_get_presentation_version(self) -> None:
         """Test get presentation version."""
         sut = get_office_file_version(
-            Path(
-                Path.cwd(),
-                "tests",
-                "powerpoint",
-                "extract",
-                "test.pptm",
-            ),
+            Path(Path.cwd(), "tests", "powerpoint", "extract", "test.pptm")
         )
         assert sut == "v0.1.0"  # noqa: S101
 

@@ -24,8 +24,7 @@ from src.pre_commit_vba.pre_commit_vba import (
 
 
 @pytest.mark.skipif(
-    pre_commit_vba.DispatchEx is None,
-    reason="pywin32 is only available on Windows",
+    pre_commit_vba.DispatchEx is None, reason="pywin32 is only available on Windows"
 )
 class TestUtf8Converter:
     """Tests for Utf8Converter class."""
@@ -54,8 +53,7 @@ class TestUtf8Converter:
             code_folder="code",
         )
         options = SettingsOptionsHandleOffice(
-            enable_folder_annotation=True,
-            create_gitignore=True,
+            enable_folder_annotation=True, create_gitignore=True
         )
         if Path.is_dir(settings.common_folder):
             shutil.rmtree(settings.common_folder)
@@ -133,8 +131,7 @@ class TestUtf8Converter:
             code_folder="code",
         )
         options = SettingsOptionsHandleOffice(
-            enable_folder_annotation=True,
-            create_gitignore=False,
+            enable_folder_annotation=True, create_gitignore=False
         )
         if Path.is_dir(settings.common_folder):
             shutil.rmtree(settings.common_folder)
@@ -183,8 +180,7 @@ class TestUtf8ConverterFolderAnnotation:
             code_folder="code",
         )
         options = SettingsOptionsHandleOffice(
-            enable_folder_annotation=False,
-            create_gitignore=False,
+            enable_folder_annotation=False, create_gitignore=False
         )
         if Path.is_dir(settings.common_folder):
             shutil.rmtree(settings.common_folder)
@@ -209,14 +205,11 @@ class TestUtf8ConverterFolderAnnotation:
                 shutil.rmtree(settings.common_folder)
 
     def test_enable_folder_annotation_without_match_keeps_code_root(
-        self,
-        tmp_path: Path,
+        self, tmp_path: Path
     ) -> None:
         """Enabled annotation should fallback to code root when no marker exists."""
         common_folder = SettingsCommonFolder(
-            tmp_path / "workbook.xlsm",
-            ".tmp",
-            include_extension=True,
+            tmp_path / "workbook.xlsm", ".tmp", include_extension=True
         )
         settings = SettingsFoldersHandleOffice(
             settings_common_folder=common_folder,
@@ -231,8 +224,7 @@ class TestUtf8ConverterFolderAnnotation:
             newline="\n",
         )
         options = SettingsOptionsHandleOffice(
-            enable_folder_annotation=True,
-            create_gitignore=False,
+            enable_folder_annotation=True, create_gitignore=False
         )
 
         Utf8Converter(settings, options)
@@ -241,15 +233,11 @@ class TestUtf8ConverterFolderAnnotation:
         assert expected_file.is_file()  # noqa: S101
 
     def test_convert_to_utf8_continues_when_binary_probe_raises_oserror(
-        self,
-        tmp_path: Path,
-        monkeypatch: pytest.MonkeyPatch,
+        self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     ) -> None:
         """Binary probe OSError should be treated as non-binary file."""
         common_folder = SettingsCommonFolder(
-            tmp_path / "workbook.xlsm",
-            ".open-error",
-            include_extension=True,
+            tmp_path / "workbook.xlsm", ".open-error", include_extension=True
         )
         settings = SettingsFoldersHandleOffice(
             settings_common_folder=common_folder,
@@ -265,17 +253,12 @@ class TestUtf8ConverterFolderAnnotation:
             newline="\n",
         )
         options = SettingsOptionsHandleOffice(
-            enable_folder_annotation=False,
-            create_gitignore=False,
+            enable_folder_annotation=False, create_gitignore=False
         )
 
         original_open = Path.open
 
-        def _patched_open(
-            path_obj: Path,
-            *args: object,
-            **kwargs: object,
-        ) -> object:
+        def _patched_open(path_obj: Path, *args: object, **kwargs: object) -> object:
             mode = args[0] if args else kwargs.get("mode", "r")
             if path_obj == export_file and mode == "rb":
                 raise OSError

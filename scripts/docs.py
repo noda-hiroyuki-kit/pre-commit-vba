@@ -29,10 +29,7 @@ from slugify import slugify as py_slugify
 
 logging.basicConfig(level=logging.INFO)
 
-SUPPORTED_LANGS = {
-    "en",
-    "ja",
-}
+SUPPORTED_LANGS = {"en", "ja"}
 
 
 app = typer.Typer()
@@ -97,7 +94,7 @@ def slugify(text: str) -> str:
                 ("'t", "t"),  # don't -> dont
                 ("**", ""),  # **FastAPI**s -> FastAPIs
             ],
-        ),
+        )
     )
 
 
@@ -164,9 +161,7 @@ def new_lang(lang: str = typer.Argument(..., callback=lang_callback)) -> None:
 @app.command()
 def build_lang(
     lang: str = typer.Argument(
-        ...,
-        callback=lang_callback,
-        autocompletion=complete_existing_lang,
+        ..., callback=lang_callback, autocompletion=complete_existing_lang
     ),
 ) -> None:
     """Build the docs for a language."""
@@ -238,9 +233,7 @@ def get_zensical_theme_language(lang: str) -> str:
 
 
 def stage_translated_docs(
-    staged_docs_path: Path,
-    lang_docs_path: Path,
-    missing_translation: str,
+    staged_docs_path: Path, lang_docs_path: Path, missing_translation: str
 ) -> None:
     """Replace staged Japanese pages with translations where available."""
     for staged_file in staged_docs_path.rglob("*.md"):
@@ -256,8 +249,7 @@ def stage_translated_docs(
         elif not is_non_translated_path(relative_path):
             staged_file.write_text(
                 add_markdown_notice(
-                    staged_file.read_text(encoding="utf-8"),
-                    missing_translation,
+                    staged_file.read_text(encoding="utf-8"), missing_translation
                 ),
                 encoding="utf-8",
                 newline="\n",
@@ -316,7 +308,7 @@ def get_nav_section_names() -> dict[str, dict[str, str]]:
     if not isinstance(raw_section_names, dict):
         typer.echo(
             f"Invalid nav section names in {nav_section_names_path}: "
-            "expected a mapping of section names to language mappings",
+            "expected a mapping of section names to language mappings"
         )
         raise typer.Abort
 
@@ -325,7 +317,7 @@ def get_nav_section_names() -> dict[str, dict[str, str]]:
         if not isinstance(title, str) or not isinstance(translations, dict):
             typer.echo(
                 f"Invalid nav section names in {nav_section_names_path}: "
-                "expected string titles and language mappings",
+                "expected string titles and language mappings"
             )
             raise typer.Abort
         if any(
@@ -334,7 +326,7 @@ def get_nav_section_names() -> dict[str, dict[str, str]]:
         ):
             typer.echo(
                 f"Invalid nav section names in {nav_section_names_path}: "
-                "expected string language names and translations",
+                "expected string language names and translations"
             )
             raise typer.Abort
         section_names[title] = dict(translations)
@@ -345,9 +337,7 @@ NavItem = str | dict[str, str | list["NavItem"]]
 
 
 def translate_nav_item(
-    item: NavItem,
-    lang: str,
-    section_names: dict[str, dict[str, str]],
+    item: NavItem, lang: str, section_names: dict[str, dict[str, str]]
 ) -> NavItem:
     """Translate a single nav entry's navigation title."""
     if not isinstance(item, dict):
@@ -358,7 +348,7 @@ def translate_nav_item(
         if translations is None or lang not in translations:
             typer.echo(
                 f"Missing nav title translation for: {title!r} (lang: {lang}), "
-                "update it in docs/nav_section_names.yml",
+                "update it in docs/nav_section_names.yml"
             )
             raise typer.Abort
         children_value: object = children
@@ -372,16 +362,14 @@ def translate_nav_item(
         else:
             typer.echo(
                 f"Invalid nav children for {title!r}: expected a string or list, "
-                f"got {type(children_value).__name__}",
+                f"got {type(children_value).__name__}"
             )
             raise typer.Abort
     return translated
 
 
 def translate_nav(
-    nav: list[NavItem],
-    lang: str,
-    section_names: dict[str, dict[str, str]],
+    nav: list[NavItem], lang: str, section_names: dict[str, dict[str, str]]
 ) -> list[NavItem]:
     """Translate nav section titles for the target language.
 
@@ -409,15 +397,11 @@ def stage_zensical_docs(lang: str) -> Path:
     shutil.copy2(Path("pyproject.toml"), lang_stage_path / "pyproject.toml")
 
     missing_translation = (docs_path / "missing-translation.md").read_text(
-        encoding="utf-8",
+        encoding="utf-8"
     )
 
     if lang != "ja":
-        stage_translated_docs(
-            staged_docs_path,
-            lang_docs_path,
-            missing_translation,
-        )
+        stage_translated_docs(staged_docs_path, lang_docs_path, missing_translation)
 
     shutil.copytree(ja_docs_path / "overrides", lang_stage_path / "overrides")
 
@@ -440,19 +424,12 @@ def stage_zensical_docs(lang: str) -> Path:
             nav = project_config["nav"]
             if not isinstance(nav, list):
                 typer.echo(
-                    f"Invalid project.nav: expected a list, got {type(nav).__name__}",
+                    f"Invalid project.nav: expected a list, got {type(nav).__name__}"
                 )
                 raise typer.Abort
-            project_config["nav"] = translate_nav(
-                nav,
-                lang,
-                get_nav_section_names(),
-            )
+            project_config["nav"] = translate_nav(nav, lang, get_nav_section_names())
     config_path = lang_stage_path / zensical_name
-    config_path.write_text(
-        tomli_w.dumps(config),
-        encoding="utf-8",
-    )
+    config_path.write_text(tomli_w.dumps(config), encoding="utf-8")
     return config_path
 
 
@@ -494,11 +471,7 @@ def copy_zensical_stage_to_site(lang: str) -> None:
     else:
         dist_path = site_path / lang
         shutil.rmtree(dist_path, ignore_errors=True)
-    shutil.copytree(
-        build_site_dist_path,
-        dist_path,
-        dirs_exist_ok=True,
-    )
+    shutil.copytree(build_site_dist_path, dist_path, dirs_exist_ok=True)
 
 
 @app.command()
@@ -525,8 +498,7 @@ def build_all() -> None:
 
 
 def update_alternate_languages(
-    config_text: str,
-    alternate: list[dict[str, str]],
+    config_text: str, alternate: list[dict[str, str]]
 ) -> str:
     """Update only the alternate array while preserving the rest of the TOML."""
     if not alternate:
@@ -545,8 +517,7 @@ def update_alternate_languages(
             + "\n]"
         )
     alternate_pattern = re.compile(
-        r"^alternate\s*=\s*\[\n.*?^\](?=\n)",
-        re.MULTILINE | re.DOTALL,
+        r"^alternate\s*=\s*\[\n.*?^\](?=\n)", re.MULTILINE | re.DOTALL
     )
     matches: list[re.Match[str]] = list(alternate_pattern.finditer(config_text))
     if len(matches) != 1:
@@ -570,8 +541,7 @@ def update_languages() -> None:
         alternate = updated_config["project"]["extra"]["alternate"]
         config_text = ja_config_path.read_text(encoding="utf-8")
         ja_config_path.write_text(
-            update_alternate_languages(config_text, alternate),
-            encoding="utf-8",
+            update_alternate_languages(config_text, alternate), encoding="utf-8"
         )
         raise typer.Exit(1)
     typer.echo("docs/ja/zensical.toml is up to date ✅")
@@ -588,9 +558,7 @@ def serve() -> None:
     Make sure you run the build-all command first.
     """
     typer.echo("Warning: this is a very simple server.")
-    typer.echo(
-        "For development, use the command live instead.",
-    )
+    typer.echo("For development, use the command live instead.")
     typer.echo("This is here only to preview a site with translations already built.")
     typer.echo("Make sure you run the build-all command first.")
     os.chdir("site")
@@ -634,7 +602,7 @@ def get_updated_config_content(*, use_site_url: bool = False) -> dict[str, Any]:
     # Contributors may wish to update or change these, e.g. to fix capitalization.
     language_names_path = Path(docs_path, "language_names.yml")
     local_language_names: dict[str, str] = yaml.safe_load(
-        language_names_path.read_text(encoding="utf-8"),
+        language_names_path.read_text(encoding="utf-8")
     )
     for lang_path in get_lang_paths():
         if lang_path.name == "ja" or not lang_path.is_dir():
@@ -650,7 +618,7 @@ def get_updated_config_content(*, use_site_url: bool = False) -> dict[str, Any]:
         if code not in local_language_names:
             typer.echo(
                 f"Missing language name for: {code}, "
-                "update it in docs/language_names.yml",
+                "update it in docs/language_names.yml"
             )
             raise typer.Abort
         use_name = f"{code} - {local_language_names[code]}"
@@ -696,10 +664,7 @@ def langs_json() -> None:
 
 
 def _update_code_block_state(
-    line: str,
-    *,
-    in_code_block3: bool,
-    in_code_block4: bool,
+    line: str, *, in_code_block3: bool, in_code_block4: bool
 ) -> tuple[bool, bool]:
     if in_code_block4:
         return False, not code_block4_pattern.match(line)
@@ -741,7 +706,7 @@ def _make_permalink_line(
         return line
 
     slug = slugify(
-        visible_text_extractor.extract_visible_text(strip_markdown_links(title)),
+        visible_text_extractor.extract_visible_text(strip_markdown_links(title))
     )
     original_slug = slug
     count = 1
@@ -792,7 +757,7 @@ def add_permalinks_page(path: Path, *, update_existing: bool = False) -> None:
                 update_existing=update_existing,
                 visible_text_extractor=visible_text_extractor,
                 permalinks=permalinks,
-            ),
+            )
         )
 
     with path.open("w", encoding="utf-8") as f:
@@ -804,8 +769,7 @@ def add_permalinks_pages(
     pages: list[Path],
     *,
     update_existing: bool = typer.Option(
-        default=False,
-        help="Update existing permalinks.",
+        default=False, help="Update existing permalinks."
     ),
 ) -> None:
     """Add or update header permalinks in specific pages of English docs."""
@@ -817,8 +781,7 @@ def add_permalinks_pages(
 def add_permalinks(
     *,
     update_existing: bool = typer.Option(
-        default=False,
-        help="Update existing permalinks.",
+        default=False, help="Update existing permalinks."
     ),
 ) -> None:
     """Add or update header permalinks in all pages of En docs."""

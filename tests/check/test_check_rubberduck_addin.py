@@ -7,10 +7,7 @@ from unittest import mock
 from typer.testing import CliRunner
 
 from src.pre_commit_vba import pre_commit_vba
-from src.pre_commit_vba.pre_commit_vba import (
-    app,
-    has_rubberduck_addin_references,
-)
+from src.pre_commit_vba.pre_commit_vba import app, has_rubberduck_addin_references
 
 runner = CliRunner()
 
@@ -41,10 +38,7 @@ WITHOUT_ACTIVE_RUBBERDUCK_WORKBOOK = Path(
 CHECK_DIR_WITH_RUBBERDUCK = Path("tests", "excel", "check", "withRubberduck")
 CHECK_DIR_WITHOUT_RUBBERDUCK = Path("tests", "excel", "check", "withoutRubberduck")
 CHECK_DIR_WITHOUT_ACTIVE_RUBBERDUCK = Path(
-    "tests",
-    "excel",
-    "check",
-    "withoutActiveRubberduckReference",
+    "tests", "excel", "check", "withoutActiveRubberduckReference"
 )
 
 
@@ -81,14 +75,11 @@ class TestCheckCommandRubberduckAddin:
                 return_value="release/v0.0.1-alpha",
             ),
             mock.patch.object(
-                pre_commit_vba,
-                "get_office_file_version",
-                return_value="v0.0.1-alpha",
+                pre_commit_vba, "get_office_file_version", return_value="v0.0.1-alpha"
             ),
         ):
             result = runner.invoke(
-                app,
-                ["check", f"--target-path={CHECK_DIR_WITH_RUBBERDUCK}"],
+                app, ["check", f"--target-path={CHECK_DIR_WITH_RUBBERDUCK}"]
             )
         assert result.exit_code == 1  # noqa: S101
 
@@ -104,14 +95,11 @@ class TestCheckCommandRubberduckAddin:
                 return_value="release/v0.0.1-alpha",
             ),
             mock.patch.object(
-                pre_commit_vba,
-                "get_office_file_version",
-                return_value="v0.0.1-alpha",
+                pre_commit_vba, "get_office_file_version", return_value="v0.0.1-alpha"
             ),
         ):
             result = runner.invoke(
-                app,
-                ["check", f"--target-path={CHECK_DIR_WITHOUT_RUBBERDUCK}"],
+                app, ["check", f"--target-path={CHECK_DIR_WITHOUT_RUBBERDUCK}"]
             )
         assert result.exit_code == 0  # noqa: S101
 
@@ -127,13 +115,10 @@ class TestCheckCommandRubberduckAddin:
                 return_value="release/v0.0.1-alpha",
             ),
             mock.patch.object(
-                pre_commit_vba,
-                "get_office_file_version",
-                return_value="v0.0.1-alpha",
+                pre_commit_vba, "get_office_file_version", return_value="v0.0.1-alpha"
             ),
         ):
             result = runner.invoke(
-                app,
-                ["check", f"--target-path={CHECK_DIR_WITHOUT_ACTIVE_RUBBERDUCK}"],
+                app, ["check", f"--target-path={CHECK_DIR_WITHOUT_ACTIVE_RUBBERDUCK}"]
             )
         assert result.exit_code == 0  # noqa: S101

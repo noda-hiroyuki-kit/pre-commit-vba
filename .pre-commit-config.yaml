@@ -46,7 +46,7 @@ repos:
         args: [--strict, -d, " {rules: {indentation: {spaces: 2}}}"]
         files: \.(yaml|yml)$
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.9
+    rev: v0.16.10
     hooks:
       # Run the linter.
       - id: ruff-check
@@ -54,6 +54,6 @@ repos:
       # Run the formatter.
       - id: ruff-format
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v2.3.1
+    rev: v2.4.0
     hooks:
       - id: mypy
