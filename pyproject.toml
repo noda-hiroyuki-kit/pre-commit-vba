@@ -14,21 +14,21 @@ dependencies = [
 pre-commit-vba = "pre_commit_vba.pre_commit_vba:app"
 
 [build-system]
-requires = ["uv_build>=0.12.21,<0.13"]
+requires = ["uv_build>=0.12.22,<0.13"]
 build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
-    "mypy>=2.3.1",
+    "mypy>=2.4.0",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
     "pytest-randomly>=5.0.0",
     "pyyaml>=6.0.3",
     "python-slugify>=9.1.2",
-    "ruff>=0.16.9",
+    "ruff>=0.16.10",
     "termynal>=0.14.0",
-    "tox>=4.64.6",
-    "tox-uv>=1.36.0",
+    "tox>=4.64.7",
+    "tox-uv>=1.36.1",
     "zensical>=0.0.67",
     "types-pyyaml>=6.0.12.20260815",
     "tomli-w>=1.2.0",
@@ -221,10 +221,6 @@ markers=["develop_research"]
 
 [tool.coverage.run]
 source = ["src/pre_commit_vba", "scripts"]
-include = [
-    "*/src/pre_commit_vba/pre_commit_vba.py",
-    "*/scripts/docs.py",
-]
 [tool.coverage.report]
 fail_under = 80
 exclude_also = [

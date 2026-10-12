@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Raise the minimum `uv_build` requirement from 0.12.21 to 0.12.22.<br>
+  `uv_build` の最小要件を 0.12.21 から 0.12.22 へ引き上げ.
+- Raise the minimum `mypy` requirement from 2.3.1 to 2.4.0.<br>
+  `mypy` の最小要件を 2.3.1 から 2.4.0 へ引き上げ.
+- Bump minimum `ruff` requirement from 0.16.9 to 0.16.10.<br>
+  `ruff` の最小要件を 0.16.9 から 0.16.10 へ引き上げ.
+- Bump minimum `tox` requirement from 4.64.6 to 4.64.7.<br>
+  `tox` の最小要件を 4.64.6 から 4.64.7 へ引き上げ.
+- Bump minimum `tox-uv` requirement from 1.36.0 to 1.36.1.<br>
+  `tox-uv` の最小要件を 1.36.0 から 1.36.1 へ引き上げ.
+- Align Ruff lint rules with formatter compatibility guidance and use the repository configuration in VS Code; reformat Python source and tests accordingly. ([#204])<br>
+  Ruff の lint ルールを formatter との互換性に関する公式ガイダンスに合わせ、VS Code でもリポジトリの設定を使用するよう変更. 変更後のルールに合わせて Python ソースとテストを再整形. ([#204])
+
+### Fixed
+
+- Remove the ignored coverage `include` setting to eliminate the `include-ignored` warning without changing coverage measurement targets.<br>
+  無視されていた coverage の `include` 設定を削除し、計測対象を変更せずに `include-ignored` 警告を解消.
+
 ## [0.4.6] - 2026-10-12
 
 ### Changed
@@ -557,3 +577,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#184]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/pull/184
 [#189]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/pull/189
 [#198]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/pull/198
+[#204]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/pull/204
