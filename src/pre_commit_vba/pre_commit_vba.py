@@ -311,7 +311,8 @@ class SettingsFoldersHandleOffice:
     def custom_ui_folder(self) -> Path:
         """Return custom UI folder path."""
         return Path(
-            self.__settings_common_folder.common_folder, self.__custom_ui_folder
+            self.__settings_common_folder.common_folder,
+            self.__custom_ui_folder,
         )
 
     @property
@@ -339,7 +340,10 @@ class SettingsOptionsHandleOffice:
     """Settings for handling Office options."""
 
     def __init__(
-        self, *, enable_folder_annotation: bool, create_gitignore: bool
+        self,
+        *,
+        enable_folder_annotation: bool,
+        create_gitignore: bool,
     ) -> None:
         """Initialize settings."""
         self.__enable_folder_annotation = enable_folder_annotation
@@ -423,7 +427,8 @@ class ExcelVbaExporter(OfficeVbaExporter):
             settings.export_folder.mkdir(parents=True, exist_ok=True)
             for vb_comp in workbook.VBProject.VBComponents:
                 vb_comp_file_name = vb_component_type_factory(
-                    vb_comp.Name, vb_comp.Type
+                    vb_comp.Name,
+                    vb_comp.Type,
                 ).file_name
                 vb_comp.Export(Path(settings.export_folder, f"{vb_comp_file_name}"))
         finally:
@@ -582,7 +587,7 @@ class CustomUiExtractor:
                 file_data = zip_ref.read(full_item_name)
             self.__settings.custom_ui_folder.mkdir(parents=True, exist_ok=True)
             with Path(self.__settings.custom_ui_folder, Path(full_item_name).name).open(
-                mode="wb"
+                mode="wb",
             ) as xml_file:
                 xml_file.write(file_data)
         except KeyError:
@@ -612,7 +617,9 @@ class Utf8Converter:
             return
         gitignore_content = f"{self.__settings.export_folder.name}/\n"
         with Path(self.__settings.common_folder, ".gitignore").open(
-            mode="w", encoding="utf-8", newline="\n"
+            mode="w",
+            encoding="utf-8",
+            newline="\n",
         ) as gitignore_file:
             gitignore_file.write(gitignore_content)
 
@@ -621,10 +628,10 @@ class Utf8Converter:
             if self.__is_binary(file_path):
                 continue
             text_before_trailing_ws_removal = self.__format_line_breaks(
-                file_path.read_text(encoding="cp932")
+                file_path.read_text(encoding="cp932"),
             )
             content = self.__remove_trailing_white_space_in_vba_metadata_portion(
-                text_before_trailing_ws_removal
+                text_before_trailing_ws_removal,
             )
             code_folder = self.__get_code_folder(content)
             code_folder.mkdir(parents=True, exist_ok=True)
@@ -639,7 +646,8 @@ class Utf8Converter:
         return remover.remove_trailing_white_space(text)
 
     def _trailing_white_space_class_factory(
-        self, text: str
+        self,
+        text: str,
     ) -> ITrailingWhiteSpaceRemover:
         if re.search(r"^VERSION 5", text):
             return FrxModuleTrailingWhiteSpaceRemover()
@@ -1062,16 +1070,20 @@ def extract_vba_code_from_office_files(  # noqa: PLR0913, C901
     custom_ui_folder: Annotated[str, typer.Option()] = "customUI",
     code_folder: Annotated[str, typer.Option()] = "code",
     version: Annotated[  # noqa: ARG001
-        bool | None, typer.Option("--version", callback=version_callback, is_eager=True)
+        bool | None,
+        typer.Option("--version", callback=version_callback, is_eager=True),
     ] = None,
     enable_folder_annotation: Annotated[
-        bool, typer.Option("--enable-folder-annotation/--disable-folder-annotation")
+        bool,
+        typer.Option("--enable-folder-annotation/--disable-folder-annotation"),
     ] = True,
     create_gitignore: Annotated[
-        bool, typer.Option("--create-gitignore/--not-create-gitignore")
+        bool,
+        typer.Option("--create-gitignore/--not-create-gitignore"),
     ] = True,
     include_extension: Annotated[
-        bool, typer.Option("--include-extension/--exclude-extension")
+        bool,
+        typer.Option("--include-extension/--exclude-extension"),
     ] = True,
 ) -> None:
     """Extract VBA code from Office files."""
@@ -1133,7 +1145,7 @@ def extract_vba_code_from_office_files(  # noqa: PLR0913, C901
             logger.error(
                 "Staging state changed during extract command. "
                 "Review staged changes with 'git diff --cached', "
-                "re-stage any updated files if needed, and then re-run the command."
+                "re-stage any updated files if needed, and then re-run the command.",
             )
             sys.exit(1)
 
@@ -1143,7 +1155,8 @@ def check(
     *,
     target_path: Annotated[str, typer.Option()] = ".",
     version: Annotated[  # noqa: ARG001
-        bool | None, typer.Option("--version", callback=version_callback, is_eager=True)
+        bool | None,
+        typer.Option("--version", callback=version_callback, is_eager=True),
     ] = None,
 ) -> None:
     """Check Office file version and detect Rubberduck Add-in references."""
