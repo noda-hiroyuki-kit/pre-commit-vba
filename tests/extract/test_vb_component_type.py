@@ -32,10 +32,7 @@ class TestVbComponentType:
             ],
         )
         def test_vb_component_type_factory(
-            self,
-            module_name: str,
-            type_id: int,
-            expected_class: type,
+            self, module_name: str, type_id: int, expected_class: type
         ) -> None:
             """Test vb_component_type_factory returns correct instance."""
             vb_component = vb_component_type_factory(module_name, type_id)
@@ -57,10 +54,7 @@ class TestVbComponentType:
             ],
         )
         def test_return_proper_file_name(
-            self,
-            module_name: str,
-            type_id: int,
-            expected: str,
+            self, module_name: str, type_id: int, expected: str
         ) -> None:
             """Test vb_component_type_factory returns correct instance."""
             sut = vb_component_type_factory(module_name, type_id)

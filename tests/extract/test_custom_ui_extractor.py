@@ -98,16 +98,11 @@ class TestCustomUiExtractor:
         assert not settings.custom_ui_folder.exists()  # noqa: S101
 
     def test_logs_japanese_workbook_filename_without_mojibake(
-        self,
-        caplog: pytest.LogCaptureFixture,
+        self, caplog: pytest.LogCaptureFixture
     ) -> None:
         """Issue121: log output should keep Japanese workbook filename."""
         workbook_path = Path(
-            "tests",
-            "excel",
-            "fixtures",
-            "issue121",
-            "Issue121_日本語.xlsm",
+            "tests", "excel", "fixtures", "issue121", "Issue121_日本語.xlsm"
         )
         common_folder = SettingsCommonFolder(workbook_path, ".test")
         settings = SettingsFoldersHandleOffice(
@@ -132,17 +127,12 @@ class TestCustomUiExtractor:
                 shutil.rmtree(settings.common_folder)
 
     @pytest.mark.skipif(
-        sys.platform != "win32",
-        reason="Windows specific encoding behavior",
+        sys.platform != "win32", reason="Windows specific encoding behavior"
     )
     def test_japanese_filename_is_readable_by_utf8_consumers(self) -> None:
         """Issue121: UTF-8 consumers should read Japanese filename without mojibake."""
         workbook_path = Path(
-            "tests",
-            "excel",
-            "fixtures",
-            "issue121",
-            "Issue121_日本語.xlsm",
+            "tests", "excel", "fixtures", "issue121", "Issue121_日本語.xlsm"
         )
         common_folder = SettingsCommonFolder(workbook_path, ".test")
         settings = SettingsFoldersHandleOffice(
@@ -179,7 +169,7 @@ class TestCustomUiExtractor:
 
                 shutil.rmtree(settings.common_folder)
             CustomUiExtractor(settings)
-            """,
+            """
         )
         env = os.environ.copy()
         env["PYTHONUTF8"] = "0"

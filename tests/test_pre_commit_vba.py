@@ -63,8 +63,7 @@ class TestWindowsOnlyImportError:
             pre_commit_vba.get_dispatch_ex()
 
     def test_dispatch_ex_is_none_when_win32com_client_import_fails(
-        self,
-        monkeypatch: pytest.MonkeyPatch,
+        self, monkeypatch: pytest.MonkeyPatch
     ) -> None:
         """Module import fallback should set DispatchEx to None."""
         original_import = __import__
@@ -104,9 +103,7 @@ class TestWordApplicationSetup:
         dispatch_ex = mock.Mock(return_value=word_app)
 
         with mock.patch.object(
-            pre_commit_vba,
-            "get_dispatch_ex",
-            return_value=dispatch_ex,
+            pre_commit_vba, "get_dispatch_ex", return_value=dispatch_ex
         ):
             result = pre_commit_vba.get_noninteractive_word_app()
 
@@ -129,9 +126,7 @@ class TestPowerPointApplicationSetup:
         dispatch_ex = mock.Mock(return_value=powerpoint_app)
 
         with mock.patch.object(
-            pre_commit_vba,
-            "get_dispatch_ex",
-            return_value=dispatch_ex,
+            pre_commit_vba, "get_dispatch_ex", return_value=dispatch_ex
         ):
             result = pre_commit_vba.get_noninteractive_powerpoint_app()
 
@@ -158,9 +153,7 @@ class TestMainEntryPoint:
                 pass
 
             def command(
-                self,
-                *_args: object,
-                **_kwargs: object,
+                self, *_args: object, **_kwargs: object
             ) -> Callable[[object], object]:
                 def _decorator(func: object) -> object:
                     return func
@@ -189,8 +182,7 @@ class TestSettingsCommonFolder:
     def test_legacy_workbook_path_keyword_is_supported(self) -> None:
         """The former constructor keyword should remain supported."""
         settings = pre_commit_vba.SettingsCommonFolder(
-            workbook_path=Path("tests", "sample.xlsm"),
-            folder_suffix=".VBA",
+            workbook_path=Path("tests", "sample.xlsm"), folder_suffix=".VBA"
         )
 
         assert settings.office_file_path == Path("tests", "sample.xlsm")  # noqa: S101
@@ -199,9 +191,7 @@ class TestSettingsCommonFolder:
     def test_common_folder_uses_stem_when_include_extension_is_false(self) -> None:
         """When include_extension is False, extension should be excluded."""
         settings = pre_commit_vba.SettingsCommonFolder(
-            Path("tests", "sample.workbook.xlsm"),
-            ".VBA",
-            include_extension=False,
+            Path("tests", "sample.workbook.xlsm"), ".VBA", include_extension=False
         )
 
         expected = Path("tests", "sample.VBA")
@@ -211,10 +201,7 @@ class TestSettingsCommonFolder:
 class TestIsOfficeFile:
     """Tests for Office file detection."""
 
-    @pytest.mark.parametrize(
-        "suffix",
-        [".XLTM", ".xlsm", ".XLSM", ".xltm", ".xlam"],
-    )
+    @pytest.mark.parametrize("suffix", [".XLTM", ".xlsm", ".XLSM", ".xltm", ".xlam"])
     def test_returns_true_for_supported_excel_extension(self, suffix: str) -> None:
         """Supported Excel extensions should be recognized regardless of case."""
         assert pre_commit_vba.is_excel_file(Path(f"workbook{suffix}")) is True  # noqa: S101
@@ -227,22 +214,13 @@ class TestIsOfficeFile:
         assert pre_commit_vba.is_office_file(Path(f"document{suffix}")) is True  # noqa: S101
 
     @pytest.mark.parametrize("suffix", [".pptm", ".PPTM", ".potm"])
-    def test_returns_true_for_supported_powerpoint_extension(
-        self,
-        suffix: str,
-    ) -> None:
+    def test_returns_true_for_supported_powerpoint_extension(self, suffix: str) -> None:
         """Supported PowerPoint extensions should be recognized regardless of case."""
         assert (  # noqa: S101
-            pre_commit_vba.is_powerpoint_file(
-                Path(f"presentation{suffix}"),
-            )
-            is True
+            pre_commit_vba.is_powerpoint_file(Path(f"presentation{suffix}")) is True
         )
         assert (  # noqa: S101
-            pre_commit_vba.is_office_file(
-                Path(f"presentation{suffix}"),
-            )
-            is True
+            pre_commit_vba.is_office_file(Path(f"presentation{suffix}")) is True
         )
 
     def test_returns_false_for_unsupported_powerpoint_addin_extension(self) -> None:
@@ -283,14 +261,10 @@ class TestIsOfficeFile:
     def test_legacy_settings_handle_workbook_path_property_is_supported(self) -> None:
         """The former settings handle property should remain supported."""
         common_folder = pre_commit_vba.SettingsCommonFolder(
-            workbook_path=Path("tests", "sample.xlsm"),
-            folder_suffix=".VBA",
+            workbook_path=Path("tests", "sample.xlsm"), folder_suffix=".VBA"
         )
         settings = pre_commit_vba.SettingsFoldersHandleExcel(
-            common_folder,
-            "export",
-            "customUI",
-            "code",
+            common_folder, "export", "customUI", "code"
         )
 
         assert settings.workbook_path == Path("tests", "sample.xlsm")  # noqa: S101
@@ -312,9 +286,7 @@ class TestWordDocumentExtraction:
 
     @pytest.mark.parametrize("fixture_name", ["test-doc.docm", "test-doc.dotm"])
     def test_extract_command_exports_word_fixture(
-        self,
-        fixture_name: str,
-        tmp_path: Path,
+        self, fixture_name: str, tmp_path: Path
     ) -> None:
         """The Word fixtures should be extracted through Word.Application."""
         fixture_path = Path("tests", "word", "extract", "with_codes", fixture_name)
@@ -325,8 +297,7 @@ class TestWordDocumentExtraction:
         component.Name = "Module1"
         component.Type = pre_commit_vba.constants.vbext_ct_StdModule
         component.Export.side_effect = lambda path: path.write_text(
-            'Attribute VB_Name = "Module1"\r\n',
-            encoding="cp932",
+            'Attribute VB_Name = "Module1"\r\n', encoding="cp932"
         )
         document = mock.Mock()
         document.VBProject.VBComponents = [component]
@@ -335,9 +306,7 @@ class TestWordDocumentExtraction:
 
         with (
             mock.patch.object(
-                pre_commit_vba,
-                "get_noninteractive_word_app",
-                return_value=word_app,
+                pre_commit_vba, "get_noninteractive_word_app", return_value=word_app
             ),
             mock.patch.object(pre_commit_vba, "add_to_staging"),
         ):
@@ -345,17 +314,12 @@ class TestWordDocumentExtraction:
 
         assert result.exit_code == 0, result.output  # noqa: S101
         word_app.Documents.Open.assert_called_once_with(
-            str(target_path),
-            ReadOnly=True,
-            AddToRecentFiles=False,
+            str(target_path), ReadOnly=True, AddToRecentFiles=False
         )
         component.Export.assert_called_once()
         assert Path(tmp_path, f"{fixture_name}.VBA", "code", "Module1.bas").is_file()  # noqa: S101
         assert Path(  # noqa: S101
-            tmp_path,
-            f"{fixture_name}.VBA",
-            "customUI",
-            "customUI14.xml",
+            tmp_path, f"{fixture_name}.VBA", "customUI", "customUI14.xml"
         ).is_file()
         document.Close.assert_called_once_with(SaveChanges=False)
         word_app.Quit.assert_called_once()
@@ -366,9 +330,7 @@ class TestPowerPointPresentationExtraction:
 
     @pytest.mark.parametrize("fixture_name", ["test.pptm", "test.potm"])
     def test_extract_command_exports_powerpoint_fixture(
-        self,
-        fixture_name: str,
-        tmp_path: Path,
+        self, fixture_name: str, tmp_path: Path
     ) -> None:
         """The PowerPoint fixtures should be extracted.
 
@@ -382,8 +344,7 @@ class TestPowerPointPresentationExtraction:
         component.Name = "Module1"
         component.Type = pre_commit_vba.constants.vbext_ct_StdModule
         component.Export.side_effect = lambda path: path.write_text(
-            'Attribute VB_Name = "Module1"\r\n',
-            encoding="cp932",
+            'Attribute VB_Name = "Module1"\r\n', encoding="cp932"
         )
         presentation = mock.Mock()
         presentation.VBProject.VBComponents = [component]
@@ -402,17 +363,12 @@ class TestPowerPointPresentationExtraction:
 
         assert result.exit_code == 0, result.output  # noqa: S101
         powerpoint_app.Presentations.Open.assert_called_once_with(
-            str(target_path),
-            ReadOnly=True,
-            WithWindow=False,
+            str(target_path), ReadOnly=True, WithWindow=False
         )
         component.Export.assert_called_once()
         assert Path(tmp_path, f"{fixture_name}.VBA", "code", "Module1.bas").is_file()  # noqa: S101
         assert Path(  # noqa: S101
-            tmp_path,
-            f"{fixture_name}.VBA",
-            "customUI",
-            "customUI14.xml",
+            tmp_path, f"{fixture_name}.VBA", "customUI", "customUI14.xml"
         ).is_file()
         presentation.Close.assert_called_once_with()
         powerpoint_app.Quit.assert_called_once()
@@ -426,8 +382,7 @@ def _project_version() -> str:
 
 
 def _run_extract_issue107_with_cli_runner(
-    target_path: str,
-    result_queue: multiprocessing.Queue,
+    target_path: str, result_queue: multiprocessing.Queue
 ) -> None:
     """Execute extract command through CliRunner and pass result to parent."""
     result = runner.invoke(
@@ -452,8 +407,7 @@ def _run_extract_issue107_with_cli_runner(
 
 
 def _run_check_issue107_with_cli_runner(
-    target_path: str,
-    result_queue: multiprocessing.Queue,
+    target_path: str, result_queue: multiprocessing.Queue
 ) -> None:
     """Execute check command through CliRunner and pass result to parent."""
     with (
@@ -463,9 +417,7 @@ def _run_check_issue107_with_cli_runner(
             return_value="release/v0.0.1-alpha",
         ),
         mock.patch.object(
-            pre_commit_vba,
-            "has_rubberduck_addin_references",
-            return_value=False,
+            pre_commit_vba, "has_rubberduck_addin_references", return_value=False
         ),
     ):
         result = runner.invoke(app, ["check", "--target-path", target_path])
@@ -532,9 +484,7 @@ class TestExcelCleanupLogging:
         excel_app.Quit.side_effect = OSError("quit failed")
 
         with mock.patch.object(
-            pre_commit_vba,
-            "get_noninteractive_excel_app",
-            return_value=excel_app,
+            pre_commit_vba, "get_noninteractive_excel_app", return_value=excel_app
         ):
             result = pre_commit_vba.get_office_file_version(Path("dummy.xlsm"))
 
@@ -561,9 +511,7 @@ class TestExcelCleanupLogging:
         )
 
         with mock.patch.object(
-            pre_commit_vba,
-            "get_noninteractive_excel_app",
-            return_value=excel_app,
+            pre_commit_vba, "get_noninteractive_excel_app", return_value=excel_app
         ):
             pre_commit_vba.ExcelVbaExporter(settings)
 
@@ -571,8 +519,7 @@ class TestExcelCleanupLogging:
         assert "Failed to clean up Excel resource: application" in caplog.text  # noqa: S101
 
     def test_get_workbook_version_swallows_non_com_cleanup_errors(
-        self,
-        caplog: pytest.LogCaptureFixture,
+        self, caplog: pytest.LogCaptureFixture
     ) -> None:
         """Non-COM cleanup errors should not alter command outcome."""
         caplog.set_level(logging.DEBUG)
@@ -585,9 +532,7 @@ class TestExcelCleanupLogging:
         excel_app.Quit.side_effect = TypeError("quit failed")
 
         with mock.patch.object(
-            pre_commit_vba,
-            "get_noninteractive_excel_app",
-            return_value=excel_app,
+            pre_commit_vba, "get_noninteractive_excel_app", return_value=excel_app
         ):
             result = pre_commit_vba.get_office_file_version(Path("dummy.xlsm"))
 
@@ -599,7 +544,7 @@ class TestExcelCleanupLogging:
         """COM cleanup errors should be logged without escaping."""
         caplog.set_level(logging.DEBUG)
         action = mock.Mock(
-            side_effect=pre_commit_vba.com_error(-1, "cleanup failed", None),
+            side_effect=pre_commit_vba.com_error(-1, "cleanup failed", None)
         )
 
         pre_commit_vba.cleanup_office_resource(action, "application", "Excel")
@@ -618,17 +563,13 @@ class TestWordCleanupLogging:
         word_app.Documents.Open.return_value = document
 
         with mock.patch.object(
-            pre_commit_vba,
-            "get_noninteractive_word_app",
-            return_value=word_app,
+            pre_commit_vba, "get_noninteractive_word_app", return_value=word_app
         ):
             result = pre_commit_vba.get_office_file_version(Path("dummy.docm"))
 
         assert result == "0.3.11"  # noqa: S101
         word_app.Documents.Open.assert_called_once_with(
-            "dummy.docm",
-            ReadOnly=True,
-            AddToRecentFiles=False,
+            "dummy.docm", ReadOnly=True, AddToRecentFiles=False
         )
         document.Close.assert_called_once_with(SaveChanges=False)
         word_app.Quit.assert_called_once_with()
@@ -649,9 +590,7 @@ class TestWordCleanupLogging:
 
         assert result == "0.3.11"  # noqa: S101
         powerpoint_app.Presentations.Open.assert_called_once_with(
-            "dummy.pptm",
-            ReadOnly=True,
-            WithWindow=False,
+            "dummy.pptm", ReadOnly=True, WithWindow=False
         )
         presentation.Close.assert_called_once_with()
         powerpoint_app.Quit.assert_called_once_with()
@@ -675,9 +614,7 @@ class TestWordCleanupLogging:
         )
 
         with mock.patch.object(
-            pre_commit_vba,
-            "get_noninteractive_word_app",
-            return_value=word_app,
+            pre_commit_vba, "get_noninteractive_word_app", return_value=word_app
         ):
             pre_commit_vba.WordVbaExporter(settings)
 
@@ -782,9 +719,7 @@ class TestAddToStaging:
         process.returncode = 0
 
         with mock.patch.object(
-            pre_commit_vba.subprocess,
-            "Popen",
-            return_value=process,
+            pre_commit_vba.subprocess, "Popen", return_value=process
         ):
             pre_commit_vba.add_to_staging(settings)
 
@@ -808,9 +743,7 @@ class TestGetStagingStatus:
         process.returncode = 0
 
         with mock.patch.object(
-            pre_commit_vba.subprocess,
-            "Popen",
-            return_value=process,
+            pre_commit_vba.subprocess, "Popen", return_value=process
         ):
             result = pre_commit_vba.get_staging_status()
 
@@ -853,9 +786,7 @@ class TestGetCurrentBranchName:
         ]
 
         with mock.patch.object(
-            pre_commit_vba.subprocess,
-            "Popen",
-            return_value=process,
+            pre_commit_vba.subprocess, "Popen", return_value=process
         ):
             result = pre_commit_vba.get_current_branch_name()
 
@@ -913,10 +844,7 @@ class TestVbaCompressedStreamHelpers:
 
         with pytest.raises(ValueError, match="previous chunk"):
             pre_commit_vba._decompress_vba_tokens(  # noqa: SLF001
-                data,
-                0,
-                len(data),
-                decompressed,
+                data, 0, len(data), decompressed
             )
 
     def test_decompress_vba_tokens_rejects_truncated_copy_token(self) -> None:
@@ -928,8 +856,7 @@ class TestVbaCompressedStreamHelpers:
         decompressed = bytearray(b"AB")
 
         with pytest.raises(
-            ValueError,
-            match=r"Truncated.*copy token|copy token.*truncated",
+            ValueError, match=r"Truncated.*copy token|copy token.*truncated"
         ):
             pre_commit_vba._decompress_vba_tokens(data, 0, len(data), decompressed)  # noqa: SLF001
 
@@ -1032,12 +959,7 @@ class TestCodeMetadataPortionIsOkInTrailingWhitespaceCheck:
         """Set up for test."""
         with mock.patch.object(pre_commit_vba, "add_to_staging", return_value=None):
             test_target_path = Path(
-                Path.cwd(),
-                "tests",
-                "excel",
-                "extract",
-                "with_codes",
-                "v0.0.1-alpha",
+                Path.cwd(), "tests", "excel", "extract", "with_codes", "v0.0.1-alpha"
             )
             runner.invoke(
                 app,
@@ -1082,40 +1004,20 @@ class TestCodeMetadataPortionIsOkInTrailingWhitespaceCheck:
             process.kill()
             stdout_data, _ = process.communicate()
         finally:
-            shutil.rmtree(
-                Path(
-                    test_target_path,
-                    "test.xlsm.test",
-                ),
-                ignore_errors=True,
-            )
-            shutil.rmtree(
-                Path(
-                    test_target_path,
-                    "test.xltm.test",
-                ),
-                ignore_errors=True,
-            )
-            shutil.rmtree(
-                Path(
-                    test_target_path,
-                    "test.xlam.test",
-                ),
-                ignore_errors=True,
-            )
+            shutil.rmtree(Path(test_target_path, "test.xlsm.test"), ignore_errors=True)
+            shutil.rmtree(Path(test_target_path, "test.xltm.test"), ignore_errors=True)
+            shutil.rmtree(Path(test_target_path, "test.xlam.test"), ignore_errors=True)
         return process, stdout_data
 
     def test_process_return_code_is_zero(
-        self,
-        set_up: typing.tuple[subprocess.Popen, bytes],
+        self, set_up: typing.tuple[subprocess.Popen, bytes]
     ) -> None:
         """Test that the process return code is zero."""
         process, _ = set_up
         assert process.returncode == 0  # noqa: S101
 
     def test_stdout_contains_passed_message(
-        self,
-        set_up: typing.tuple[subprocess.Popen, bytes],
+        self, set_up: typing.tuple[subprocess.Popen, bytes]
     ) -> None:
         """Test that the stdout contains 'Passed' message."""
         _, stdout_data = set_up
@@ -1127,9 +1029,7 @@ class TestExtractCommandPositiveOptions:
     """Test class for extract command."""
 
     def extract_command_fixture(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        target_path: Path,
+        self, caplog: pytest.LogCaptureFixture, target_path: Path
     ) -> Result:
         """Test that the extract command executes without errors."""
         caplog.set_level(DEBUG)
@@ -1153,9 +1053,7 @@ class TestExtractCommandPositiveOptions:
         )
 
     def test_target_path_is_logged(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        tmp_path: Path,
+        self, caplog: pytest.LogCaptureFixture, tmp_path: Path
     ) -> None:
         """Test that target_path is logged."""
         result = self.extract_command_fixture(caplog, tmp_path)
@@ -1163,9 +1061,7 @@ class TestExtractCommandPositiveOptions:
         assert str(tmp_path.resolve()).lower() in caplog.text  # noqa: S101
 
     def test_folder_suffix_is_test(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        tmp_path: Path,
+        self, caplog: pytest.LogCaptureFixture, tmp_path: Path
     ) -> None:
         """Test that folder suffix is '.test'."""
         result = self.extract_command_fixture(caplog, tmp_path)
@@ -1173,9 +1069,7 @@ class TestExtractCommandPositiveOptions:
         assert "folder-suffix: .test" in caplog.text  # noqa: S101
 
     def test_export_folder_is_export(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        tmp_path: Path,
+        self, caplog: pytest.LogCaptureFixture, tmp_path: Path
     ) -> None:
         """Test that export folder is 'export'."""
         result = self.extract_command_fixture(caplog, tmp_path)
@@ -1183,9 +1077,7 @@ class TestExtractCommandPositiveOptions:
         assert "export-folder: export" in caplog.text  # noqa: S101
 
     def test_custom_ui_folder_is_custom_ui(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        tmp_path: Path,
+        self, caplog: pytest.LogCaptureFixture, tmp_path: Path
     ) -> None:
         """Test that custom ui folder is 'customUI'."""
         result = self.extract_command_fixture(caplog, tmp_path)
@@ -1193,9 +1085,7 @@ class TestExtractCommandPositiveOptions:
         assert "custom-ui-folder: customUI" in caplog.text  # noqa: S101
 
     def test_code_folder_is_code(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        tmp_path: Path,
+        self, caplog: pytest.LogCaptureFixture, tmp_path: Path
     ) -> None:
         """Test that code folder is 'code'."""
         result = self.extract_command_fixture(caplog, tmp_path)
@@ -1203,9 +1093,7 @@ class TestExtractCommandPositiveOptions:
         assert "code-folder: code" in caplog.text  # noqa: S101
 
     def test_enable_folder_annotation_is_true(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        tmp_path: Path,
+        self, caplog: pytest.LogCaptureFixture, tmp_path: Path
     ) -> None:
         """Test that enable-folder-annotation is True."""
         result = self.extract_command_fixture(caplog, tmp_path)
@@ -1213,9 +1101,7 @@ class TestExtractCommandPositiveOptions:
         assert "enable-folder-annotation: True" in caplog.text  # noqa: S101
 
     def test_create_gitignore_is_true(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        tmp_path: Path,
+        self, caplog: pytest.LogCaptureFixture, tmp_path: Path
     ) -> None:
         """Test that create-gitignore is True."""
         result = self.extract_command_fixture(caplog, tmp_path)
@@ -1228,12 +1114,7 @@ class TestExtractCommandExistenceFiles:
     """Test class for extract command."""
 
     extract_folder = Path(
-        Path.cwd(),
-        "tests",
-        "excel",
-        "extract",
-        "with_codes",
-        "v0.0.1-alpha",
+        Path.cwd(), "tests", "excel", "extract", "with_codes", "v0.0.1-alpha"
     )
 
     @pytest.fixture(scope="class")
@@ -1243,20 +1124,14 @@ class TestExtractCommandExistenceFiles:
     ) -> typing.tuple[pre_commit_vba.ExcelApplicationProtocol, CliRunner]:
         """Fixture to prepare pre-existing Excel workbook for testing."""
         extract_folder = Path(
-            Path.cwd(),
-            "tests",
-            "excel",
-            "extract",
-            "with_codes",
-            "v0.0.1-alpha",
+            Path.cwd(), "tests", "excel", "extract", "with_codes", "v0.0.1-alpha"
         )
         generated_folder = Path(extract_folder, "test.xlsm.test")
         _excel_instance = DispatchEx("Excel.Application")
         _excel_instance.Visible = False
         _excel_instance.DisplayAlerts = False
         _workbook = _excel_instance.Workbooks.Open(
-            Path(extract_folder, "test.xlsm").as_posix(),
-            ReadOnly=True,
+            Path(extract_folder, "test.xlsm").as_posix(), ReadOnly=True
         )
         try:
             sut = cls.sut()
@@ -1331,23 +1206,19 @@ class TestExtractCommandExistenceFiles:
     def test_exists_file(
         self,
         prepare_pre_existing_excel: typing.tuple[  # noqa: ARG002
-            pre_commit_vba.ExcelApplicationProtocol,
-            CliRunner,
+            pre_commit_vba.ExcelApplicationProtocol, CliRunner
         ],
         file: str,
     ) -> None:
         """Test that the extract command creates expected files and folders."""
         assert Path(  # noqa: S101
-            self.extract_folder,
-            "test.xlsm.test",
-            file,
+            self.extract_folder, "test.xlsm.test", file
         ).exists()
 
     def test_terminate_normal(
         self,
         prepare_pre_existing_excel: typing.tuple[
-            pre_commit_vba.ExcelApplicationProtocol,
-            CliRunner,
+            pre_commit_vba.ExcelApplicationProtocol, CliRunner
         ],
     ) -> None:
         """Test that the extract command terminates normally."""
@@ -1357,8 +1228,7 @@ class TestExtractCommandExistenceFiles:
     def test_exists_pre_existing_excel_instance(
         self,
         prepare_pre_existing_excel: typing.tuple[
-            pre_commit_vba.ExcelApplicationProtocol,
-            CliRunner,
+            pre_commit_vba.ExcelApplicationProtocol, CliRunner
         ],
     ) -> None:
         """Test that the pre-existing Excel instance is not None."""
@@ -1393,14 +1263,9 @@ def test_not_exists_test1_vba_folder() -> None:
                     "--create-gitignore",
                 ],
             )
-        test_result = not Path(
-            test_execute_path,
-            "test1.test",
-        ).exists()
+        test_result = not Path(test_execute_path, "test1.test").exists()
         if Path(test_execute_path, "test1.test").exists():
-            shutil.rmtree(
-                Path(test_execute_path, "test1.test"),
-            )
+            shutil.rmtree(Path(test_execute_path, "test1.test"))
         assert test_result  # noqa: S101
     finally:
         shutil.rmtree(
@@ -1408,8 +1273,7 @@ def test_not_exists_test1_vba_folder() -> None:
             ignore_errors=True,
         )
         shutil.rmtree(
-            Path(test_execute_path, "test_without_codes.xlsm.test"),
-            ignore_errors=True,
+            Path(test_execute_path, "test_without_codes.xlsm.test"), ignore_errors=True
         )
 
 
@@ -1420,10 +1284,7 @@ def test_not_exists_test_without_codes_xlsm_vba_folder() -> None:
         shutil.rmtree(Path(test_execute_path, "test1.test"))
     if Path(test_execute_path, "test_without_codes.xlsm.test").exists():
         shutil.rmtree(Path(test_execute_path, "test_without_codes.xlsm.test"))
-    xlsm_test_folder_path = Path(
-        test_execute_path,
-        "test_without_codes.xlsm.test",
-    )
+    xlsm_test_folder_path = Path(test_execute_path, "test_without_codes.xlsm.test")
     if xlsm_test_folder_path.exists():
         shutil.rmtree(xlsm_test_folder_path)
     try:
@@ -1459,10 +1320,7 @@ def test_not_exists_test_without_codes_xlsm_vba_folder() -> None:
 def test_not_exists_test_without_codes_docm_vba_folder() -> None:
     """Test that the test_without_codes.docm.test folder does not exist."""
     test_execute_path = Path(Path.cwd(), "tests", "word", "without_codes")
-    docm_test_folder_path = Path(
-        test_execute_path,
-        "test_without_codes.docm.test",
-    )
+    docm_test_folder_path = Path(test_execute_path, "test_without_codes.docm.test")
     if docm_test_folder_path.exists():
         shutil.rmtree(docm_test_folder_path)
     try:
@@ -1509,10 +1367,7 @@ def test_extract_command_does_not_timeout_on_issue107_repro_workbook() -> None:
     temp_root = Path(tempfile.mkdtemp(prefix="issue107-", dir=Path.cwd() / "tests"))
     target_workbook = Path(temp_root, repro_workbook.name)
     extracted_this_workbook = Path(
-        temp_root,
-        f"{repro_workbook.name}.VBA",
-        "export",
-        "ThisWorkbook.cls",
+        temp_root, f"{repro_workbook.name}.VBA", "export", "ThisWorkbook.cls"
     )
     git_path = shutil.which("git")
     assert git_path is not None  # noqa: S101
@@ -1572,7 +1427,7 @@ def test_check_command_does_not_timeout_on_issue107_repro_workbook() -> None:
     assert repro_workbook.exists()  # noqa: S101
 
     temp_root = Path(
-        tempfile.mkdtemp(prefix="issue107-check-", dir=Path.cwd() / "tests"),
+        tempfile.mkdtemp(prefix="issue107-check-", dir=Path.cwd() / "tests")
     )
     target_workbook = Path(temp_root, repro_workbook.name)
     git_path = shutil.which("git")
@@ -1623,9 +1478,7 @@ class TestExtractCommandNegativeOptions:
     """Test class for extract command."""
 
     def extract_command_fixture(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        target_path: Path,
+        self, caplog: pytest.LogCaptureFixture, target_path: Path
     ) -> Result:
         """Test that the extract command executes without errors."""
         caplog.set_level(DEBUG)
@@ -1649,9 +1502,7 @@ class TestExtractCommandNegativeOptions:
         )
 
     def test_enable_folder_annotation_is_false(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        tmp_path: Path,
+        self, caplog: pytest.LogCaptureFixture, tmp_path: Path
     ) -> None:
         """Test that enable-folder-annotation is False."""
         result = self.extract_command_fixture(caplog, tmp_path)
@@ -1659,9 +1510,7 @@ class TestExtractCommandNegativeOptions:
         assert "enable-folder-annotation: False" in caplog.text  # noqa: S101
 
     def test_create_gitignore_is_false(
-        self,
-        caplog: pytest.LogCaptureFixture,
-        tmp_path: Path,
+        self, caplog: pytest.LogCaptureFixture, tmp_path: Path
     ) -> None:
         """Test that create-gitignore is False."""
         result = self.extract_command_fixture(caplog, tmp_path)
@@ -1674,22 +1523,10 @@ def test_runtime_version_matches_pyproject() -> None:
     assert pre_commit_vba.__version__ == _project_version()  # noqa: S101
 
 
-@pytest.mark.parametrize(
-    "subcommand",
-    [
-        "extract",
-        "check",
-    ],
-)
+@pytest.mark.parametrize("subcommand", ["extract", "check"])
 def test_display_version_subcommand(subcommand: str) -> None:
     """Test that the version is displayed correctly."""
-    result = runner.invoke(
-        app,
-        [
-            subcommand,
-            "--version",
-        ],
-    )
+    result = runner.invoke(app, [subcommand, "--version"])
     assert result.exit_code == 0  # noqa: S101
     text = result.output.rstrip()
     pattern = r"pre-commit-vba version: (.*)"
@@ -1715,8 +1552,7 @@ class TestCheckSubCommand:
     test_target_path = Path("tests", "excel", "extract", "with_codes", "v0.0.1-alpha")
 
     def test_not_exist_office_files_outs_no_found(
-        self,
-        caplog: Generator[pytest.LogCaptureFixture],
+        self, caplog: Generator[pytest.LogCaptureFixture]
     ) -> None:
         """Test not exist workbook in target path."""
         caplog.set_level(logging.INFO)
@@ -1732,30 +1568,21 @@ class TestCheckSubCommand:
             )
 
     def test_not_a_release_or_hotfix_branch_outs_in_feature_branch(
-        self,
-        caplog: Generator[pytest.LogCaptureFixture],
+        self, caplog: Generator[pytest.LogCaptureFixture]
     ) -> None:
         """Test not release branch."""
         caplog.set_level(logging.INFO)
         with mock.patch.object(
-            pre_commit_vba,
-            "get_current_branch_name",
-            return_value="feature/issue-1234",
+            pre_commit_vba, "get_current_branch_name", return_value="feature/issue-1234"
         ):
             sut = runner.invoke(
-                app,
-                [
-                    "check",
-                    "--target-path",
-                    self.test_target_path.as_posix(),
-                ],
+                app, ["check", "--target-path", self.test_target_path.as_posix()]
             )
             assert sut.exit_code == 0  # noqa: S101
             assert "Branch is not a release or hotfix branch" in caplog.text  # noqa: S101
 
     def test_branch_release_v_0_0_1_0123_outs_invalid_semantic_version(
-        self,
-        caplog: Generator[pytest.LogCaptureFixture],
+        self, caplog: Generator[pytest.LogCaptureFixture]
     ) -> None:
         """Test invalid semantic version in branch name."""
         caplog.set_level(logging.INFO)
@@ -1765,19 +1592,13 @@ class TestCheckSubCommand:
             return_value="release/v0.0.1-0123",
         ):
             sut = runner.invoke(
-                app,
-                [
-                    "check",
-                    "--target-path",
-                    self.test_target_path.as_posix(),
-                ],
+                app, ["check", "--target-path", self.test_target_path.as_posix()]
             )
             assert sut.exit_code == 1  # noqa: S101
             assert "Invalid semantic version in branch name" in caplog.text  # noqa: S101
 
     def test_branch_release_v_0_0_1_alpha_outs_version_check_passed(
-        self,
-        caplog: Generator[pytest.LogCaptureFixture],
+        self, caplog: Generator[pytest.LogCaptureFixture]
     ) -> None:
         """Test check ok."""
         caplog.set_level(logging.INFO)
@@ -1788,25 +1609,17 @@ class TestCheckSubCommand:
                 return_value="release/v0.0.1-alpha",
             ),
             mock.patch.object(
-                pre_commit_vba,
-                "has_rubberduck_addin_references",
-                return_value=False,
+                pre_commit_vba, "has_rubberduck_addin_references", return_value=False
             ),
         ):
             sut = runner.invoke(
-                app,
-                [
-                    "check",
-                    "--target-path",
-                    self.test_target_path.as_posix(),
-                ],
+                app, ["check", "--target-path", self.test_target_path.as_posix()]
             )
             assert sut.exit_code == 0  # noqa: S101
             assert "Version check passed." in caplog.text  # noqa: S101
 
     def test_branch_release_v_0_0_1_alpha_outs_version_check_passed_with_temp_xl_file(
-        self,
-        caplog: Generator[pytest.LogCaptureFixture],
+        self, caplog: Generator[pytest.LogCaptureFixture]
     ) -> None:
         """Test check ok under the presence of temporary Excel files."""
         caplog.set_level(logging.INFO)
@@ -1817,25 +1630,17 @@ class TestCheckSubCommand:
                 return_value="release/v0.0.1-alpha",
             ),
             mock.patch.object(
-                pre_commit_vba,
-                "has_rubberduck_addin_references",
-                return_value=False,
+                pre_commit_vba, "has_rubberduck_addin_references", return_value=False
             ),
         ):
             sut = runner.invoke(
-                app,
-                [
-                    "check",
-                    "--target-path",
-                    self.test_target_path.as_posix(),
-                ],
+                app, ["check", "--target-path", self.test_target_path.as_posix()]
             )
             assert sut.exit_code == 0  # noqa: S101
             assert "Version check passed." in caplog.text  # noqa: S101
 
     def test_branch_release_version_mismatch_exits_with_error(
-        self,
-        caplog: Generator[pytest.LogCaptureFixture],
+        self, caplog: Generator[pytest.LogCaptureFixture]
     ) -> None:
         """Version mismatch between workbook and branch should exit with error."""
         caplog.set_level(logging.INFO)
@@ -1846,30 +1651,20 @@ class TestCheckSubCommand:
                 return_value="release/v0.0.1-alpha",
             ),
             mock.patch.object(
-                pre_commit_vba,
-                "has_rubberduck_addin_references",
-                return_value=False,
+                pre_commit_vba, "has_rubberduck_addin_references", return_value=False
             ),
             mock.patch.object(
-                pre_commit_vba,
-                "get_office_file_version",
-                return_value="v9.9.9",
+                pre_commit_vba, "get_office_file_version", return_value="v9.9.9"
             ),
         ):
             sut = runner.invoke(
-                app,
-                [
-                    "check",
-                    "--target-path",
-                    self.test_target_path.as_posix(),
-                ],
+                app, ["check", "--target-path", self.test_target_path.as_posix()]
             )
             assert sut.exit_code == 1  # noqa: S101
             assert "Version mismatch" in caplog.text  # noqa: S101
 
     def test_branch_hotfix_v_0_0_1_alpha_outs_version_check_passed(
-        self,
-        caplog: Generator[pytest.LogCaptureFixture],
+        self, caplog: Generator[pytest.LogCaptureFixture]
     ) -> None:
         """Test check ok."""
         caplog.set_level(logging.INFO)
@@ -1880,18 +1675,11 @@ class TestCheckSubCommand:
                 return_value="hotfix/v0.0.1-alpha",
             ),
             mock.patch.object(
-                pre_commit_vba,
-                "has_rubberduck_addin_references",
-                return_value=False,
+                pre_commit_vba, "has_rubberduck_addin_references", return_value=False
             ),
         ):
             sut = runner.invoke(
-                app,
-                [
-                    "check",
-                    "--target-path",
-                    self.test_target_path.as_posix(),
-                ],
+                app, ["check", "--target-path", self.test_target_path.as_posix()]
             )
             assert sut.exit_code == 0  # noqa: S101
             assert "Version check passed." in caplog.text  # noqa: S101

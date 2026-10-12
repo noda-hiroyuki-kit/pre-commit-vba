@@ -22,8 +22,7 @@ from src.pre_commit_vba.pre_commit_vba import (
 
 
 @pytest.mark.skipif(
-    pre_commit_vba.DispatchEx is None,
-    reason="pywin32 is only available on Windows",
+    pre_commit_vba.DispatchEx is None, reason="pywin32 is only available on Windows"
 )
 class TestPowerPointVbaExporter:
     """Tests for PowerPointVbaExporter class."""
