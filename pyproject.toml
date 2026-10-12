@@ -89,6 +89,7 @@ ignore = [
     "E117", # over-indented
     "D203", # incorrect-blank-line-before-class
     "D206", # docstring-tab-indentation
+    "D213", # multi-line-summary-second-line
     "D300", # triple-single-quotes
     "Q000", # bad-quotes-inline-string
     "Q001", # bad-quotes-multiline-string
