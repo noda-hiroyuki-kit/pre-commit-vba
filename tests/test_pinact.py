@@ -31,8 +31,7 @@ def test_pinact_exit_code_and_authentication(exit_code: int) -> None:
 
 
 @pytest.mark.parametrize(
-    ("returncode", "stdout", "stderr"),
-    [(1, "", "Not authenticated\n"), (0, "", "")],
+    ("returncode", "stdout", "stderr"), [(1, "", "Not authenticated\n"), (0, "", "")]
 )
 def test_authentication_failure(
     returncode: int, stdout: str, stderr: str, capsys: pytest.CaptureFixture[str]

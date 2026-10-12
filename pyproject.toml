@@ -81,9 +81,24 @@ target-version = "py314"
 # McCabe complexity (`C901`) by default.
 select = ["ALL"]
 ignore = [
+    # Based on Ruff's formatter conflict guidance:
+    # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+    "W191", # tab-indentation
+    "E111", # indentation-with-invalid-multiple
+    "E114", # indentation-with-invalid-multiple-comment
+    "E117", # over-indented
     "D203", # incorrect-blank-line-before-class
+    "D206", # docstring-tab-indentation
     "D213", # multi-line-summary-second-line
-    "COM812" # missing-trailing-comma
+    "D300", # triple-single-quotes
+    "Q000", # bad-quotes-inline-string
+    "Q001", # bad-quotes-multiline-string
+    "Q002", # bad-quotes-docstring
+    "Q003", # avoidable-escaped-quote
+    "Q004", # unnecessary-escaped-quote
+    "COM812", # missing-trailing-comma
+    "COM819", # prohibited-trailing-comma
+    "ISC002", # multi-line-implicit-string-concatenation
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
