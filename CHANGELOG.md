@@ -7,26 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.4.7] - 2026-10-12
+## [0.4.7] - 2026-10-13
 
 ### Changed
 
-- Raise the minimum `uv_build` requirement from 0.12.21 to 0.12.22.<br>
+- Raise the minimum `uv_build` requirement from 0.12.21 to 0.12.22.  
   `uv_build` の最小要件を 0.12.21 から 0.12.22 へ引き上げ.
-- Raise the minimum `mypy` requirement from 2.3.1 to 2.4.0.<br>
+- Raise the minimum `mypy` requirement from 2.3.1 to 2.4.0.  
   `mypy` の最小要件を 2.3.1 から 2.4.0 へ引き上げ.
-- Bump minimum `ruff` requirement from 0.16.9 to 0.16.10.<br>
+- Bump minimum `ruff` requirement from 0.16.9 to 0.16.10.  
   `ruff` の最小要件を 0.16.9 から 0.16.10 へ引き上げ.
-- Bump minimum `tox` requirement from 4.64.6 to 4.64.7.<br>
+- Bump minimum `tox` requirement from 4.64.6 to 4.64.7.  
   `tox` の最小要件を 4.64.6 から 4.64.7 へ引き上げ.
-- Bump minimum `tox-uv` requirement from 1.36.0 to 1.36.1.<br>
+- Bump minimum `tox-uv` requirement from 1.36.0 to 1.36.1.  
   `tox-uv` の最小要件を 1.36.0 から 1.36.1 へ引き上げ.
-- Align Ruff lint rules with formatter compatibility guidance and use the repository configuration in VS Code; reformat Python source and tests accordingly. ([#204])<br>
+- Align Ruff lint rules with formatter compatibility guidance and use the repository configuration in VS Code; reformat Python source and tests accordingly. ([#204])  
   Ruff の lint ルールを formatter との互換性に関する公式ガイダンスに合わせ、VS Code でもリポジトリの設定を使用するよう変更. 変更後のルールに合わせて Python ソースとテストを再整形. ([#204])
 
 ### Fixed
 
-- Remove the ignored coverage `include` setting to eliminate the `include-ignored` warning without changing coverage measurement targets.<br>
+- Remove the ignored coverage `include` setting to eliminate the `include-ignored` warning without changing coverage measurement targets.  
   無視されていた coverage の `include` 設定を削除し、計測対象を変更せずに `include-ignored` 警告を解消.
 
 ## [0.4.6] - 2026-10-12
@@ -67,7 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update the README and English and Japanese guides to use `prek`, clarify setup and VBA extraction workflows, and standardize the Rubberduck Add-in spelling.<br>
+- Update the README and English and Japanese guides to use `prek`, clarify setup and VBA extraction workflows, and standardize the Rubberduck Add-in spelling.  
   README と英語・日本語のガイドを `prek` に対応させ, 環境構築と VBA 抽出の手順を明確化し, Rubberduck Add-in の表記を統一.
 - Refine repository skills for issue creation, review responses, skill authoring, and zensical documentation.  
   issue 作成、review response、skill 作成、zensical ドキュメント用の repository skill 手順を整理.
