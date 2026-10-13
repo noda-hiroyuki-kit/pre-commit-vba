@@ -1010,14 +1010,16 @@ class TestCodeMetadataPortionIsOkInTrailingWhitespaceCheck:
         return process, stdout_data
 
     def test_process_return_code_is_zero(
-        self, set_up: typing.tuple[subprocess.Popen, bytes]
+        self,
+        set_up: typing.tuple[subprocess.Popen, bytes],
     ) -> None:
         """Test that the process return code is zero."""
         process, _ = set_up
         assert process.returncode == 0  # noqa: S101
 
     def test_stdout_contains_passed_message(
-        self, set_up: typing.tuple[subprocess.Popen, bytes]
+        self,
+        set_up: typing.tuple[subprocess.Popen, bytes],
     ) -> None:
         """Test that the stdout contains 'Passed' message."""
         _, stdout_data = set_up
@@ -1427,7 +1429,7 @@ def test_check_command_does_not_timeout_on_issue107_repro_workbook() -> None:
     assert repro_workbook.exists()  # noqa: S101
 
     temp_root = Path(
-        tempfile.mkdtemp(prefix="issue107-check-", dir=Path.cwd() / "tests")
+        tempfile.mkdtemp(prefix="issue107-check-", dir=Path.cwd() / "tests"),
     )
     target_workbook = Path(temp_root, repro_workbook.name)
     git_path = shutil.which("git")
@@ -1568,7 +1570,8 @@ class TestCheckSubCommand:
             )
 
     def test_not_a_release_or_hotfix_branch_outs_in_feature_branch(
-        self, caplog: Generator[pytest.LogCaptureFixture]
+        self,
+        caplog: Generator[pytest.LogCaptureFixture],
     ) -> None:
         """Test not release branch."""
         caplog.set_level(logging.INFO)
@@ -1582,7 +1585,8 @@ class TestCheckSubCommand:
             assert "Branch is not a release or hotfix branch" in caplog.text  # noqa: S101
 
     def test_branch_release_v_0_0_1_0123_outs_invalid_semantic_version(
-        self, caplog: Generator[pytest.LogCaptureFixture]
+        self,
+        caplog: Generator[pytest.LogCaptureFixture],
     ) -> None:
         """Test invalid semantic version in branch name."""
         caplog.set_level(logging.INFO)
@@ -1598,7 +1602,8 @@ class TestCheckSubCommand:
             assert "Invalid semantic version in branch name" in caplog.text  # noqa: S101
 
     def test_branch_release_v_0_0_1_alpha_outs_version_check_passed(
-        self, caplog: Generator[pytest.LogCaptureFixture]
+        self,
+        caplog: Generator[pytest.LogCaptureFixture],
     ) -> None:
         """Test check ok."""
         caplog.set_level(logging.INFO)
@@ -1664,7 +1669,8 @@ class TestCheckSubCommand:
             assert "Version mismatch" in caplog.text  # noqa: S101
 
     def test_branch_hotfix_v_0_0_1_alpha_outs_version_check_passed(
-        self, caplog: Generator[pytest.LogCaptureFixture]
+        self,
+        caplog: Generator[pytest.LogCaptureFixture],
     ) -> None:
         """Test check ok."""
         caplog.set_level(logging.INFO)
