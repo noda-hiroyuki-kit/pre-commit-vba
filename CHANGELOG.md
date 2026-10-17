@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Raise the minimum `uv_build` requirement from 0.12.22 to 0.12.23.  
+  `uv_build` の最小要件を 0.12.22 から 0.12.23 へ引き上げ.
+- Raise the minimum `typer` requirement from 0.27.2 to 0.27.3.  
+  `typer` の最小要件を 0.27.2 から 0.27.3 へ引き上げ.
 - Bump minimum `tox` requirement from 4.64.7 to 4.64.9. ([#208])  
   `tox` の最小要件を 4.64.7 から 4.64.9 へ引き上げ.
 - Bump minimum `zensical` requirement from 0.0.67 to 0.0.68. ([#208])  
