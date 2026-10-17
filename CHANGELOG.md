@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Bump minimum `tox` requirement from 4.64.7 to 4.64.9. ([#208])  
+  `tox` の最小要件を 4.64.7 から 4.64.9 へ引き上げ.
+- Bump minimum `zensical` requirement from 0.0.67 to 0.0.68. ([#208])  
+  `zensical` の最小要件を 0.0.67 から 0.0.68 へ引き上げ.
+- Updates `j178/prek-action` from 3.0.0 to 3.0.1. ([#209])  
+  `j178/prek-action`を 3.0.0 から 3.0.1 へ引き上げ.
+
 ## [0.4.7] - 2026-10-13
 
 ### Changed
@@ -581,3 +588,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#189]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/pull/189
 [#198]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/pull/198
 [#204]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/pull/204
+[#208]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/pull/208
+[#209]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/pull/209
