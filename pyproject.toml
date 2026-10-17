@@ -27,9 +27,9 @@ dev = [
     "python-slugify>=9.1.2",
     "ruff>=0.16.10",
     "termynal>=0.14.0",
-    "tox>=4.64.7",
+    "tox>=4.64.9",
     "tox-uv>=1.36.1",
-    "zensical>=0.0.67",
+    "zensical>=0.0.68",
     "types-pyyaml>=6.0.12.20260815",
     "tomli-w>=1.2.0",
 ]

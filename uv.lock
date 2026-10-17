@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = "==3.14.*"
 
 [options]
@@ -419,10 +419,10 @@ dev = [
     { name = "ruff", specifier = ">=0.16.10" },
     { name = "termynal", specifier = ">=0.14.0" },
     { name = "tomli-w", specifier = ">=1.2.0" },
-    { name = "tox", specifier = ">=4.64.7" },
+    { name = "tox", specifier = ">=4.64.9" },
     { name = "tox-uv", specifier = ">=1.36.1" },
     { name = "types-pyyaml", specifier = ">=6.0.12.20260815" },
-    { name = "zensical", specifier = ">=0.0.67" },
+    { name = "zensical", specifier = ">=0.0.68" },
 ]
 
 [[package]]
