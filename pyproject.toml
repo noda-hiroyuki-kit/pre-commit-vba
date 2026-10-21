@@ -3,7 +3,7 @@ name = "pre-commit-vba"
 version = "0.4.8"
 description = "Extracts VBA code from Office files for managing VBA code in git and checks Office file integrity."
 readme = "README.md"
-requires-python = ">=3.14,<3.15"
+requires-python = ">=3.14,<3.16"
 dependencies = [
     "olefile>=0.47",
     "pywin32>=312;platform_system == 'Windows'",
@@ -14,7 +14,7 @@ dependencies = [
 pre-commit-vba = "pre_commit_vba.pre_commit_vba:app"
 
 [build-system]
-requires = ["uv_build>=0.12.23,<0.13"]
+requires = ["uv_build>=0.13.0,<0.14"]
 build-backend = "uv_build"
 
 [dependency-groups]
@@ -175,7 +175,7 @@ ignore_errors = true
 
 [tool.tox]
 requires = ["tox>=4.19"]
-env_list = ["dependency", "fix", "type", "3.14"]
+env_list = ["dependency", "fix", "type", "3.14", "3.15"]
 
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
