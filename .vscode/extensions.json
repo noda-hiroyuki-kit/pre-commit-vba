@@ -2,7 +2,7 @@
     "recommendations": [
         "ms-python.python",
         "charliermarsh.ruff",
-        "ms-python.mypy-type-checker",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "astral-sh.ty"
     ]
 }
