@@ -57,7 +57,7 @@ Run these checks before opening a pull request:
 ```powershell
 uvx ruff format
 uvx ruff check
-uvx mypy src/
+uvx ty check src/
 ```
 
 Notes:
@@ -113,7 +113,7 @@ Please explain:
 Pull request checklist:
 
 - [ ] Tests added or updated when behavior changes.
-- [ ] `ruff`, `mypy`, and `pytest` pass locally.
+- [ ] `ruff`, `ty`, and `pytest` pass locally.
 - [ ] Documentation updated when needed.
 
 ## Commit and Branch Conventions

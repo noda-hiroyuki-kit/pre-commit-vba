@@ -28,7 +28,7 @@
 - Use `uv sync` to install the locked development environment.
 - Format Python with `uv run ruff format`.
 - Run lint checks with `uv run ruff check`.
-- Run type checks with `uv run mypy src/`.
+- Run type checks with `uv run ty check src/`.
 - Run the full validation suite with `uv run tox`.
 - The project uses pytest with coverage configured in `pyproject.toml`; maintain
   at least 80% coverage.

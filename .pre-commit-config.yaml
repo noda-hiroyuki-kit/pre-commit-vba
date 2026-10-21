@@ -53,7 +53,8 @@ repos:
         args: [--fix]
       # Run the formatter.
       - id: ruff-format
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v2.4.0
+  - repo: https://github.com/astral-sh/ty-pre-commit
+    rev: v0.0.86
     hooks:
-      - id: mypy
+      - id: ty
+        args: [--locked]

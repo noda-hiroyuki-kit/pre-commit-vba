@@ -57,7 +57,7 @@ PR を開く前に, 以下のチェックを実行してください.
 ```powershell
 uvx ruff format
 uvx ruff check
-uvx mypy src/
+uvx ty check src/
 ```
 
 注意点：
@@ -113,7 +113,7 @@ uv run tox -e 3.14
 PR チェックリスト：
 
 - [ ] 動作変更時にテストを追加・更新している
-- [ ] `ruff`, `mypy`, `pytest` がローカルで通過している
+- [ ] `ruff`, `ty`, `pytest` がローカルで通過している
 - [ ] 必要に応じてドキュメントを更新している
 
 ## コミット・ブランチ規約

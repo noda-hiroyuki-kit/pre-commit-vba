@@ -45,7 +45,7 @@ license: MIT
 - Python 3.14
 - Format: `uv run ruff format`
 - Lint: `uv run ruff check`
-- Type check: `uv run mypy src/`
+- Type check: `uv run ty check src/`
 - Tests and full validation: `uv run tox`
 - Keep descriptions specific so Copilot can decide when to load the skill.
 

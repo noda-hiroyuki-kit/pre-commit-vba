@@ -33,7 +33,7 @@ fix, or an implementation in this repository.
    ```powershell
    uv run ruff format
    uv run ruff check
-   uv run mypy src/
+   uv run ty check src/
    uv run tox
    ```
 
@@ -47,7 +47,7 @@ fix, or an implementation in this repository.
 - Process review comments strictly one by one; never bundle comments.
 - If a comment is ambiguous, ask for clarification before proposing a change.
 - Use Python 3.14 and `uv`.
-- Format with Ruff, lint with Ruff, and type-check with mypy.
+- Format with Ruff, lint with Ruff, and type-check with ty.
 - Tests use pytest, live under `tests/`, and target at least 80% coverage.
 - Add or update tests whenever behavior changes.
 - Use Conventional Commits in English:
