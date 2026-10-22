@@ -14,7 +14,7 @@ dependencies = [
 pre-commit-vba = "pre_commit_vba.pre_commit_vba:app"
 
 [build-system]
-requires = ["uv_build>=0.13.0,<0.14"]
+requires = ["uv_build>=0.13.4,<0.14"]
 build-backend = "uv_build"
 
 [dependency-groups]
@@ -24,17 +24,19 @@ dev = [
     "pytest-randomly>=5.0.0",
     "pyyaml>=6.0.3",
     "python-slugify>=9.1.2",
-    "ruff>=0.16.10",
+    "ruff>=0.17.2",
     "termynal>=0.14.0",
     "tox>=4.64.9",
-    "tox-uv>=1.36.1",
+    "tox-uv-bare>=1.36.1",
     "zensical>=0.0.68",
     "types-pyyaml>=6.0.12.20260815",
     "tomli-w>=1.2.0",
-    "ty>=0.0.86",
+    "ty>=0.0.91",
 ]
 
 [tool.uv]
+prerelease = "disallow"
+exclude-newer-package = {ruff = false, uv=false, ty=false}
 exclude-newer = "10 days"
 
 [tool.ruff]
@@ -150,6 +152,14 @@ allowed-unresolved-imports = ["pywintypes", "win32com.**"]
 requires = ["tox>=4.19"]
 env_list = ["dependency", "fix", "type", "3.14", "3.15"]
 
+[tool.tox.env."3.14"]
+base_python = "3.14.9"
+uv_python_preference = "only-system"
+
+[tool.tox.env."3.15"]
+base_python = "3.15.1"
+uv_python_preference = "only-system"
+
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
 description = "Run test under {base_python}"
@@ -184,7 +194,7 @@ commands = [
 ]
 
 [tool.pytest]
-minversion = "9.0"
+minversion = "9.1.1"
 addopts = ["-v", "-s", "--strict-markers", "--cov", "--cov-report=html", "--cov-report=term"]
 testpaths = [
     "tests"
