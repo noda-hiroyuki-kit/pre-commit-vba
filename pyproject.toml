@@ -154,11 +154,11 @@ env_list = ["dependency", "fix", "type", "3.14", "3.15"]
 
 [tool.tox.env."3.14"]
 base_python = "3.14.9"
-uv_python_preference = "only-system"
+uv_python_preference = "system"
 
 [tool.tox.env."3.15"]
 base_python = "3.15.1"
-uv_python_preference = "only-system"
+uv_python_preference = "system"
 
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
