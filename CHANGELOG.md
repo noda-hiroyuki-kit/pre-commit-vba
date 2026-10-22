@@ -11,8 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add test with python 3.15.  
   python 3.15 のテストを追加.
-- Switch type checking from `mpy` to `ty`.  
-  型チェックを `mpy` から `ty` へ変更.
+- Switch type checking from `mypy` to `ty`.  
+  型チェックを `mypy` から `ty` へ変更.
 - Raise the minimum `uv_build` requirement from 0.12.23 to 0.13.4.  
   `uv_build` の最小要件を 0.12.23 から 0.13.4 へ引き上げ.  
 - Bump minimum `python-slugify` requirement from 9.1.2 to 9.1.3.  
