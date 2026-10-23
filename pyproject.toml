@@ -14,7 +14,7 @@ dependencies = [
 pre-commit-vba = "pre_commit_vba.pre_commit_vba:app"
 
 [build-system]
-requires = ["uv_build>=0.13.4,<0.14"]
+requires = ["uv_build>=0.13.5,<0.14"]
 build-backend = "uv_build"
 
 [dependency-groups]
@@ -36,8 +36,8 @@ dev = [
 
 [tool.uv]
 prerelease = "disallow"
-exclude-newer-package = {ruff = false, uv=false, ty=false}
-exclude-newer = "10 days"
+#exclude-newer-package = {ruff = false, uv=false, ty=false}
+#exclude-newer = "10 days"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
