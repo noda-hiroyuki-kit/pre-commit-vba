@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Add test with python 3.15.  
+  python 3.15 のテストを追加.
+- Switch type checking from `mypy` to `ty`.  
+  型チェックを `mypy` から `ty` へ変更.
+- Raise the minimum `uv_build` requirement from 0.12.23 to 0.13.5.  
+  `uv_build` の最小要件を 0.12.23 から 0.13.5 へ引き上げ.  
+- Bump minimum `python-slugify` requirement from 9.1.2 to 9.1.3.  
+  `python-slugify` の最小要件を 9.1.2 から 9.1.3 へ引き上げ.
+- Bump minimum `ruff` requirement from 0.16.10 to 0.17.2.  
+  `ruff` の最小要件を 0.16.10 から 0.17.2 へ引き上げ.
+- Bump minimum `tox` requirement from 4.64.9 to 4.67.1.  
+  `tox` の最小要件を 4.64.9 から 4.67.1 へ引き上げ.
+- Bump minimum `zensical` requirement from 0.0.68 to 0.0.71.  
+  `zensical` の最小要件を 0.0.68 から 0.0.71 へ引き上げ.
+- Bump minimum `types-pyyaml` requirement from 6.0.12.20260815 to 6.0.12.20260906.  
+  `types-pyyaml` の最小要件を 6.0.12.20260815 から 6.0.12.20260906 へ引き上げ.
 ## [0.4.8] - 2026-10-17
 
 ### Changed

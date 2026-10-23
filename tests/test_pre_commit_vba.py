@@ -981,8 +981,6 @@ class TestCodeMetadataPortionIsOkInTrailingWhitespaceCheck:
             )
         process = subprocess.Popen(  # noqa: S603
             [  # noqa: S607
-                "uv",
-                "run",
                 "prek",
                 "run",
                 "trailing-whitespace",

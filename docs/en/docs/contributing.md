@@ -42,7 +42,7 @@ Run the following before creating a PR.
 ```powershell
 uv run ruff format
 uv run ruff check
-uv run mypy src/
+uv run ty check src/
 ```
 
 Notes:
@@ -97,7 +97,7 @@ Include the following in your proposal:
 Checklist:
 
 - [ ] Added or updated tests
-- [ ] `ruff`, `mypy`, and `pytest` passed
+- [ ] `ruff`, `ty`, and `pytest` passed
 - [ ] Updated required documentation
 
 ## Conventions { #conventions }
