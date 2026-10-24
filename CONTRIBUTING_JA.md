@@ -41,10 +41,16 @@
 
 ## 開発環境のセットアップ
 
-このプロジェクトは `uv` を使用し, Python 3.14 をターゲットにしています.
+このプロジェクトでは `uv` を使用し, Python 3.14 と 3.15 でテストします.
 
 1. リポジトリをクローンしてディレクトリに移動します.
-2. 依存関係をインストールします.
+2. `mise` で依存関係をインストールします.
+
+```powershell
+mise install
+```
+
+3. `uv`で依存関係をインストールします.
 
 ```powershell
 uv sync
@@ -57,7 +63,7 @@ PR を開く前に, 以下のチェックを実行してください.
 ```powershell
 uvx ruff format
 uvx ruff check
-uvx mypy src/
+uvx ty check src/
 ```
 
 注意点：
@@ -72,7 +78,7 @@ uvx mypy src/
 テストスイート全体を実行します.
 
 ```powershell
-uv run tox -e 3.14
+uv run tox -e 3.14,3.15
 ```
 
 テストは `pytest` で記述され, `tests/` ディレクトリの `test_*.py` ファイルにあります.
@@ -113,7 +119,7 @@ uv run tox -e 3.14
 PR チェックリスト：
 
 - [ ] 動作変更時にテストを追加・更新している
-- [ ] `ruff`, `mypy`, `pytest` がローカルで通過している
+- [ ] `ruff`, `ty`, `pytest` がローカルで通過している
 - [ ] 必要に応じてドキュメントを更新している
 
 ## コミット・ブランチ規約

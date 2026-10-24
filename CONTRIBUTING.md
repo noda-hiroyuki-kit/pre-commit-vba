@@ -41,10 +41,16 @@ For larger changes, open an issue first so we can align on scope and direction.
 
 ## Development Setup
 
-This project uses `uv` and targets Python 3.14.
+This project uses `uv` and tests with Python 3.14 and 3.15.
 
 1. Clone the repository and move into it.
-2. Install dependencies:
+2. Install dependencies with `mise`:
+
+```powershell
+mise install
+```
+
+3. Install dependencies with `uv`:
 
 ```powershell
 uv sync
@@ -57,7 +63,7 @@ Run these checks before opening a pull request:
 ```powershell
 uvx ruff format
 uvx ruff check
-uvx mypy src/
+uvx ty check src/
 ```
 
 Notes:
@@ -72,7 +78,7 @@ Notes:
 Run the full test suite:
 
 ```powershell
-uv run tox -e 3.14
+uv run tox -e 3.14,3.15
 ```
 
 Tests are written with `pytest` and live under `tests/` with `test_*.py` naming.
@@ -113,7 +119,7 @@ Please explain:
 Pull request checklist:
 
 - [ ] Tests added or updated when behavior changes.
-- [ ] `ruff`, `mypy`, and `pytest` pass locally.
+- [ ] `ruff`, `ty`, and `pytest` pass locally.
 - [ ] Documentation updated when needed.
 
 ## Commit and Branch Conventions

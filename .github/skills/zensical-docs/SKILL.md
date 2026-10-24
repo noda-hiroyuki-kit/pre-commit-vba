@@ -37,7 +37,7 @@ documentation pages built with Zensical.
     ```powershell
     uv run ruff format
     uv run ruff check
-    uv run mypy src/
+    uv run ty check src/
     uv run tox
     ```
 

@@ -42,7 +42,7 @@ PR 前に次を実行してください.
 ```powershell
 uv run ruff format
 uv run ruff check
-uv run mypy src/
+uv run ty check src/
 ```
 
 注意点：
@@ -97,7 +97,7 @@ uv run tox -e 3.14
 チェックリスト:
 
 - [ ] テストを追加または更新した
-- [ ] `ruff` `mypy` `pytest` が通った
+- [ ] `ruff` `ty` `pytest` が通った
 - [ ] 必要な文書を更新した
 
 ## 規約 { #conventions }
