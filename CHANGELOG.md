@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.9] - 2026-10-24
+
 ### Changed
 
 - Add test with python 3.15.  
@@ -25,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `zensical` の最小要件を 0.0.68 から 0.0.72 へ引き上げ.
 - Bump minimum `types-pyyaml` requirement from 6.0.12.20260815 to 6.0.12.20260906.  
   `types-pyyaml` の最小要件を 6.0.12.20260815 から 6.0.12.20260906 へ引き上げ.
+
 ## [0.4.8] - 2026-10-17
 
 ### Changed
@@ -529,7 +532,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Release as first version
 
-[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.8...HEAD
+[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.9...HEAD
+[0.4.9]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.8...v0.4.9
 [0.4.8]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.7...v0.4.8
 [0.4.7]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.6...v0.4.7
 [0.4.6]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.5...v0.4.6
