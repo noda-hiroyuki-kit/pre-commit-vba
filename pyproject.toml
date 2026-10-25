@@ -171,6 +171,8 @@ runner = "uv-venv-lock-runner"
 description = "update dependency"
 skip_install = true
 commands = [
+    ["uv", "python", "upgrade", "3.14"],
+    ["uv", "python", "upgrade", "3.15"],
     ["prek", "update", "--cooldown-days", "10"],
     ["uv", "run", "scripts/pinact.py"],
     ["uv", "lock", "-U"],
