@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.10] - 2026-10-xx
+
+### Changed
+
+- Update the cspell hook to v10.4.0.  
+  cspell hook を v10.4.0 へ更新.
+
 ## [0.4.9] - 2026-10-24
 
 ### Changed
@@ -532,7 +539,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Release as first version
 
-[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.9...HEAD
+[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.10...HEAD
+[0.4.10]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.9...v0.4.10
 [0.4.9]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.8...v0.4.9
 [0.4.8]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.7...v0.4.8
 [0.4.7]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.6...v0.4.7
