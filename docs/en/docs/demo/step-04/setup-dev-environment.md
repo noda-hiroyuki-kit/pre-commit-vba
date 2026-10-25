@@ -45,7 +45,7 @@ prek init
 
         [[repos]]
         repo = "https://github.com/streetsidesoftware/cspell-cli"
-        rev = "v10.3.0"
+        rev = "v10.4.0"
 
         [[repos.hooks]]
         id = "cspell"
