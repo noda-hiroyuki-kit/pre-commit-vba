@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add a security policy with instructions for privately reporting vulnerabilities.  
   脆弱性を非公開で報告するための手順を含むセキュリティポリシーを追加.
+- Add a pull request template to guide contributors through describing and validating changes.
+  変更内容と検証結果を記載するための Pull Request テンプレートを追加.
 
 ### Changed
 
