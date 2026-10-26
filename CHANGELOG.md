@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.10] - 2026-10-xx
 
+### Added
+
+- Add a security policy with instructions for privately reporting vulnerabilities.  
+  脆弱性を非公開で報告するための手順を含むセキュリティポリシーを追加.
+
 ### Changed
 
 - Update the cspell hook to v10.4.0.  
