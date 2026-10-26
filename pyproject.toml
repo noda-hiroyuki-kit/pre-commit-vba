@@ -36,8 +36,8 @@ dev = [
 
 [tool.uv]
 prerelease = "disallow"
-#exclude-newer-package = {ruff = false, uv=false, ty=false}
-#exclude-newer = "10 days"
+exclude-newer-package = {ruff = false, uv=false, ty=false}
+exclude-newer = "2 days"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
