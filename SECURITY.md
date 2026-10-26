@@ -1,5 +1,7 @@
 # Security Policy
 
+[**日本語はこちら**](SECURITY_JA.md)
+
 ## Supported Versions
 
 Security fixes are provided for the latest release of `pre-commit-vba`.

@@ -1,5 +1,7 @@
 # Accessibility
 
+[**日本語はこちら**](ACCESSIBILITY_JA.md)
+
 We want people with disabilities and people using assistive technology to be
 able to use and contribute to `pre-commit-vba`.
 
