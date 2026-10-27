@@ -31,7 +31,7 @@ dev = [
     "zensical>=0.0.72",
     "types-pyyaml>=6.0.12.20260906",
     "tomli-w>=1.2.0",
-    "ty>=0.0.91",
+    "ty>=0.0.92",
 ]
 
 [tool.uv]

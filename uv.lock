@@ -372,7 +372,7 @@ dev = [
     { name = "tomli-w", specifier = ">=1.2.0" },
     { name = "tox", specifier = ">=4.67.1" },
     { name = "tox-uv", specifier = ">=1.37.0" },
-    { name = "ty", specifier = ">=0.0.91" },
+    { name = "ty", specifier = ">=0.0.92" },
     { name = "types-pyyaml", specifier = ">=6.0.12.20260906" },
     { name = "zensical", specifier = ">=0.0.72" },
 ]
