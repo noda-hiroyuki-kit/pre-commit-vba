@@ -22,6 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update the cspell hook to v10.4.0.  
   cspell hook を v10.4.0 へ更新.
+- Raise the minimum `uv_build` requirement from 0.13.5 to 0.13.6.  
+  `uv_build` の最小要件を 0.13.5 から 0.13.6 へ引き上げ.  
+- Bump minimum `ruff` requirement from 0.17.2 to 0.17.3.  
+  `ruff` の最小要件を 0.17.2 から 0.17.3 へ引き上げ.
+- Update the Python versions used for testing to 3.14.10 and 3.15.2.  
+  テストに使用する Python のバージョンを 3.14.10 と 3.15.2 に更新.
 
 ## [0.4.9] - 2026-10-24
 
