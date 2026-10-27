@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.10] - 2026-10-xx
 
+### Added
+
+- Add a security policy with instructions for privately reporting vulnerabilities.  
+  脆弱性を非公開で報告するための手順を含むセキュリティポリシーを追加.
+- Add a pull request template to guide contributors through describing and validating changes.
+  変更内容と検証結果を記載するための Pull Request テンプレートを追加.
+- Add an accessibility statement covering goals, contributor guidance, and reporting barriers.  
+  改善目標, 貢献時の指針, 利用上の障壁の報告方法をまとめたアクセシビリティ方針を追加.
+
 ### Changed
 
 - Update the cspell hook to v10.4.0.  
