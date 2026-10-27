@@ -1,7 +1,7 @@
 [tools]
 pinact = "latest"
 prek = "latest"
-uv = "0.13.5"
+uv = "0.13.6"
 zizmor = "latest"
 
 [settings]
