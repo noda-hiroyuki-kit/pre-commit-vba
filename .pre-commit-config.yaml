@@ -3,7 +3,7 @@ default_install_hook_types: [pre-commit, commit-msg]
 default_stages: [pre-commit, manual]
 repos:
   - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v10.3.0
+    rev: v10.4.0
     hooks:
       - id: cspell # Spell check changed files
       - id: cspell # Spell check the commit message
@@ -46,7 +46,7 @@ repos:
         args: [--strict, -d, " {rules: {indentation: {spaces: 2}}}"]
         files: \.(yaml|yml)$
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.2
+    rev: v0.17.3
     hooks:
       # Run the linter.
       - id: ruff-check
@@ -54,7 +54,7 @@ repos:
       # Run the formatter.
       - id: ruff-format
   - repo: https://github.com/astral-sh/ty-pre-commit
-    rev: v0.0.91
+    rev: v0.0.93
     hooks:
       - id: ty
         args: [--locked]

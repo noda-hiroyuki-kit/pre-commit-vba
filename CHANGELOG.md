@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.10] - 2026-10-28
+
+### Added
+
+- Add a security policy with instructions for privately reporting vulnerabilities.  
+  脆弱性を非公開で報告するための手順を含むセキュリティポリシーを追加.
+- Add a pull request template to guide contributors through describing and validating changes.
+  変更内容と検証結果を記載するための Pull Request テンプレートを追加.
+- Add an accessibility statement covering goals, contributor guidance, and reporting barriers.  
+  改善目標, 貢献時の指針, 利用上の障壁の報告方法をまとめたアクセシビリティ方針を追加.
+
+### Changed
+
+- Update the cspell hook to v10.4.0.  
+  cspell hook を v10.4.0 へ更新.
+- Raise the minimum `uv_build` requirement from 0.13.5 to 0.13.6.  
+  `uv_build` の最小要件を 0.13.5 から 0.13.6 へ引き上げ.  
+- Bump minimum `ruff` requirement from 0.17.2 to 0.17.3.  
+  `ruff` の最小要件を 0.17.2 から 0.17.3 へ引き上げ.
+- Update the Python versions used for testing to 3.14.10 and 3.15.2.  
+  テストに使用する Python のバージョンを 3.14.10 と 3.15.2 に更新.
+- Bump minimum `ty` requirement from 0.0.91 to 0.0.93.  
+  `ty` の最小要件を 0.0.91 から 0.0.93 へ引き上げ.
+- Bump minimum `zensical` requirement from 0.0.72 to 0.0.73.  
+  `zensical` の最小要件を 0.0.72 から 0.0.73 へ引き上げ.
+
 ## [0.4.9] - 2026-10-24
 
 ### Changed
@@ -532,7 +558,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Release as first version
 
-[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.9...HEAD
+[unreleased]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.10...HEAD
+[0.4.10]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.9...v0.4.10
 [0.4.9]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.8...v0.4.9
 [0.4.8]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.7...v0.4.8
 [0.4.7]: https://github.com/noda-hiroyuki-kit/pre-commit-vba/compare/v0.4.6...v0.4.7
