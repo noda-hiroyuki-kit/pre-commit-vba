@@ -30,8 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   テストに使用する Python のバージョンを 3.14.10 と 3.15.2 に更新.
 - Bump minimum `ty` requirement from 0.0.91 to 0.0.93.  
   `ty` の最小要件を 0.0.91 から 0.0.93 へ引き上げ.
-- Bump minimum `zensical` requirement from 0.0.72 to 0.0.74.  
-  `zensical` の最小要件を 0.0.72 から 0.0.74 へ引き上げ.
+- Bump minimum `zensical` requirement from 0.0.72 to 0.0.73.  
+  `zensical` の最小要件を 0.0.72 から 0.0.73 へ引き上げ.
 
 ## [0.4.9] - 2026-10-24
 
