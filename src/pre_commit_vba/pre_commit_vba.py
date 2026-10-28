@@ -193,7 +193,7 @@ def cleanup_office_resource(
         )
 
 
-__version__ = "0.4.9"
+__version__ = "0.4.10"
 
 
 class UndefineTypeError(Exception):
