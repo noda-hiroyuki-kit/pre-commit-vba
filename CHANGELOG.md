@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update `j178/prek-action` from 3.0.1 to 3.1.0.  
+  `j178/prek-action` を 3.0.1 から 3.1.0 へ更新.
+
 ## [0.4.10] - 2026-10-28
 
 ### Added
