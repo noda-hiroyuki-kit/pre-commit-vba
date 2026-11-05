@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update `j178/prek-action` from 3.0.1 to 3.1.0.  
   `j178/prek-action` を 3.0.1 から 3.1.0 へ更新.
+- Update `actions/setup-python` from 7.0.0 to 7.1.0.  
+  `actions/setup-python` を 7.0.0 から 7.1.0 へ更新.
+- Update `astral-sh/setup-uv` from 10.3.0 to 10.3.2.  
+  `astral-sh/setup-uv` を 10.3.0 から 10.3.2 へ更新.
+- Bump minimum `tox` requirement from 4.67.1 to 4.67.4.  
+  `tox` の最小要件を 4.67.1 から 4.67.4 へ引き上げ.
+- Bump minimum `tox-uv` requirement from 1.37.0 to 1.37.2.  
+  `tox-uv` の最小要件を 1.37.0 から 1.37.2 へ引き上げ.
 
 ## [0.4.10] - 2026-10-28
 
