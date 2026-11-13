@@ -24,7 +24,7 @@ repos:
         entry: uv run scripts/pinact.py
         pass_filenames: false
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.31.1
+    rev: v1.32.0
     hooks:
       - id: zizmor
   - repo: builtin
@@ -54,7 +54,7 @@ repos:
       # Run the formatter.
       - id: ruff-format
   - repo: https://github.com/astral-sh/ty-pre-commit
-    rev: v0.0.93
+    rev: v0.0.96
     hooks:
       - id: ty
         args: [--locked]
