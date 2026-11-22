@@ -41,6 +41,8 @@ except ModuleNotFoundError:
 
     com_error = _ComError
 
+__version__ = "0.4.11"
+
 
 class WindowsOnlyImportError(RuntimeError):
     """Raised when a Windows-only dependency is unavailable."""
@@ -191,9 +193,6 @@ def cleanup_office_resource(
             resource_name,
             exc_info=True,
         )
-
-
-__version__ = "0.4.10"
 
 
 class UndefineTypeError(Exception):
