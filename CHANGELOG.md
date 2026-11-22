@@ -15,8 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `actions/setup-python` を 7.0.0 から 7.1.0 へ更新.
 - Update `astral-sh/setup-uv` from 10.3.0 to 10.3.3.  
   `astral-sh/setup-uv` を 10.3.0 から 10.3.3 へ更新.
-- Update `peter-evans/create-pull-request` from 8.1.1 to 8.1.2.  
-  `peter-evans/create-pull-request` を 8.1.1 から 8.1.2 へ更新.
+- Update `peter-evans/create-pull-request` from 8.1.2 to 8.1.3.  
+  `peter-evans/create-pull-request` を 8.1.2 から 8.1.3 へ更新.
+- Update the `zizmor` hook from v1.31.1 to v1.32.0.  
+  `zizmor` hook を v1.31.1 から v1.32.0 へ更新.
+- Update the `ty` hook from v0.0.93 to v0.0.101.  
+  `ty` hook を v0.0.93 から v0.0.101 へ更新.
 - Update the `uv` version used by the documentation workflow from 0.13.6 to 0.13.7.  
   ドキュメントワークフローで使用する `uv` のバージョンを 0.13.6 から 0.13.7 へ更新.
 - Use the latest `uv` version in mise.  
