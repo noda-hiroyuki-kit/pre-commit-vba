@@ -15,12 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `actions/setup-python` を 7.0.0 から 7.1.0 へ更新.
 - Update `astral-sh/setup-uv` from 10.3.0 to 10.3.3.  
   `astral-sh/setup-uv` を 10.3.0 から 10.3.3 へ更新.
-- Update `peter-evans/create-pull-request` from 8.1.2 to 8.1.3.  
-  `peter-evans/create-pull-request` を 8.1.2 から 8.1.3 へ更新.
+- Update `peter-evans/create-pull-request` from 8.1.1 to 8.1.3.  
+  `peter-evans/create-pull-request` を 8.1.1 から 8.1.3 へ更新.
 - Update the `zizmor` hook from v1.31.1 to v1.32.0.  
   `zizmor` hook を v1.31.1 から v1.32.0 へ更新.
-- Update the `ty` hook from v0.0.93 to v0.0.101.  
-  `ty` hook を v0.0.93 から v0.0.101 へ更新.
 - Update the `uv` version used by the documentation workflow from 0.13.6 to 0.13.7.  
   ドキュメントワークフローで使用する `uv` のバージョンを 0.13.6 から 0.13.7 へ更新.
 - Use the latest `uv` version in mise.  
@@ -41,8 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `zensical` の最小要件を 0.0.73 から 0.1.0 へ引き上げ.
 - Bump minimum `types-pyyaml` requirement from 6.0.12.20260906 to 6.0.12.20261103.  
   `types-pyyaml` の最小要件を 6.0.12.20260906 から 6.0.12.20261103 へ引き上げ.
-- Bump minimum `ty` requirement from 0.0.93 to 0.0.100.  
-  `ty` の最小要件を 0.0.93 から 0.0.100 へ引き上げ.
+- Update the `ty` hook from v0.0.93 to v0.0.101 and bump the minimum requirement from 0.0.93 to 0.0.100.  
+  `ty` hook を v0.0.93 から v0.0.101 へ更新し、最小要件を 0.0.93 から 0.0.100 へ引き上げ.
 - Raise the minimum `typer` requirement from 0.27.3 to 0.29.0.  
   `typer` の最小要件を 0.27.3 から 0.29.0 へ引き上げ.
 
