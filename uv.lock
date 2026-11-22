@@ -369,7 +369,7 @@ dev = [
     { name = "tox-uv", specifier = ">=1.37.7" },
     { name = "ty", specifier = ">=0.0.100" },
     { name = "types-pyyaml", specifier = ">=6.0.12.20261103" },
-    { name = "zensical", specifier = ">=0.1.0" },
+    { name = "zensical", specifier = ">=0.1.1" },
 ]
 
 [[package]]

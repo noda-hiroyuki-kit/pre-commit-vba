@@ -35,8 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `tox` の最小要件を 4.67.1 から 4.67.13 へ引き上げ.
 - Bump minimum `tox-uv` requirement from 1.37.0 to 1.37.7.  
   `tox-uv` の最小要件を 1.37.0 から 1.37.7 へ引き上げ.
-- Bump minimum `zensical` requirement from 0.0.73 to 0.1.0.  
-  `zensical` の最小要件を 0.0.73 から 0.1.0 へ引き上げ.
+- Bump minimum `zensical` requirement from 0.0.73 to 0.1.1.  
+  `zensical` の最小要件を 0.0.73 から 0.1.1 へ引き上げ.
 - Bump minimum `types-pyyaml` requirement from 6.0.12.20260906 to 6.0.12.20261103.  
   `types-pyyaml` の最小要件を 6.0.12.20260906 から 6.0.12.20261103 へ引き上げ.
 - Update the `ty` hook from v0.0.93 to v0.0.101 and bump the minimum requirement from 0.0.93 to 0.0.100.  
